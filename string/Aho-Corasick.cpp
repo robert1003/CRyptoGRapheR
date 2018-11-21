@@ -34,5 +34,5 @@ struct ACautomata{
           fr->go[i]->fail=ptr=(ptr?ptr->go[i]:root);
           fr->go[i]->dic=(ptr->cnt?ptr:ptr->dic);
           que.push(fr->go[i]);
-  }  }  }  }
+  } } } }
 }AC;
