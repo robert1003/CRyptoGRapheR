@@ -5,12 +5,9 @@ struct KDTree{
 		LL x[MXK];
 		int id;
 		Nd *l,*r;
-	}tree[MXN];
+	}tree[MXN],*root;
 	int n,k;
-	Nd *root;
-	LL dis(LL a,LL b){
-		return (a-b)*(a-b);
-	}
+	LL dis(LL a,LL b){return (a-b)*(a-b);}
 	LL dis(LL a[MXK],LL b[MXK]){
 		LL ret=0;
 		for(int i=0;i<k;i++) ret+=dis(a[i],b[i]);
@@ -42,11 +39,9 @@ struct KDTree{
 		if(td<md) md=td,mID=r->id;
 		LL old=cd[d];
 		nearest(pt[d]<r->x[d]?r->l:r->r,d+1);
-		cd[d]=dis(r->x[d],pt[d]);
-		sd+=cd[d]-old;
+		cd[d]=dis(r->x[d],pt[d]),sd+=cd[d]-old;
 		nearest(pt[d]<r->x[d]?r->r:r->l,d+1);
-		sd-=cd[d]-old;
-		cd[d]=old;
+		sd-=cd[d]-old,cd[d]=old;
 	}
 	pair<LL,int> query(vector<LL> &_pt,LL _md=1LL<<57){
 		mID=-1,md=_md;
@@ -55,4 +50,3 @@ struct KDTree{
 		return {md,mID};
 	}
 }tree;
-

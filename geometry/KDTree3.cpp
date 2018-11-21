@@ -48,12 +48,13 @@ struct KDTree{
 	LL pt[MXK],md;
 	int mID;
 	bool touch(Nd *r){
-		LL d=sqrt(md)+1;
-		for(int i=0;i<k;i++)
-			if(pt[i]<=r->mn[i]-d||pt[i]>=r->mx[i]+d)
-				return 0;
-		return 1;
-	}
+    LL d=0;
+    for(int i=0;i<k;i++){
+      if(pt[i]<=r->mn[i]) d+=dis(pt[i],r->mn[i]);
+        else if(pt[i]>=r->mx[i]) d+=dis(pt[i],r->mx[i]);
+    }
+    return d<md;
+  }
 	void nearest(Nd *r){
 		if(!r||!touch(r)) return;
 		LL td=dis(r->x,pt);
@@ -68,3 +69,4 @@ struct KDTree{
 		return {md,mID};
 	}
 }tree;
+
