@@ -18,12 +18,12 @@ struct ACautomata{
   void add(const string &str)
   { insert(root,str,0); }
   void insert(Node *cur, const string &str, int pos){
-  	for(int i=pos;i<str.size();i++){
-  		if(!cur->go[str[i]-'a'])
-  			cur->go[str[i]-'a'] = new_Node();
-  		cur=cur->go[str[i]-'a'];
-	  }
-	  cur->cnt++;
+    for(int i=pos;i<str.size();i++){
+      if(!cur->go[str[i]-'a'])
+        cur->go[str[i]-'a'] = new_Node();
+      cur=cur->go[str[i]-'a'];
+    }
+    cur->cnt++;
   }
   void make_fail(){
     queue<Node*> que;
@@ -37,5 +37,5 @@ struct ACautomata{
           fr->go[i]->fail=ptr=(ptr?ptr->go[i]:root);
           fr->go[i]->dic=(ptr->cnt?ptr:ptr->dic);
           que.push(fr->go[i]);
-	}	}	}	}
+  }  }  }  }
 }AC;
