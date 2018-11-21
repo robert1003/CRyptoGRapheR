@@ -41,7 +41,7 @@ int main(){
 			ed = i + l;
 		}
 	}
-	double res = (sum[ed].y - sum[st].y) /
+	double res = (double)(sum[ed].y - sum[st].y) /
                (sum[ed].x - sum[st].x);
 	printf("%f\n", res);
 	return 0;
