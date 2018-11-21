@@ -6,17 +6,14 @@ struct ACautomata{
       cnt = 0; fail = 0; dic=0;
       memset(go,0,sizeof(go));
     }
-  };
-  Node *root, pool[1048576];
+  }pool[1048576],*root;
   int nMem;
   Node* new_Node(){
     pool[nMem] = Node();
     return &pool[nMem++];
   }
-  void init()
-  { nMem = 0; root = new_Node(); }
-  void add(const string &str)
-  { insert(root,str,0); }
+  void init() { nMem = 0; root = new_Node(); }
+  void add(const string &str) { insert(root,str,0); }
   void insert(Node *cur, const string &str, int pos){
     for(int i=pos;i<str.size();i++){
       if(!cur->go[str[i]-'a'])
