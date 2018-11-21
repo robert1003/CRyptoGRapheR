@@ -1,9 +1,9 @@
 struct ACautomata{
   struct Node{
-    int cnt,dp;
-    Node *go[26], *fail;
+    int cnt;
+    Node *go[26], *fail, *dic;
     Node (){
-      cnt = 0; dp = -1; fail = 0;
+      cnt = 0; fail = 0; dic=0;
       memset(go,0,sizeof(go));
     }
   };
@@ -18,28 +18,23 @@ struct ACautomata{
   void add(const string &str)
   { insert(root,str,0); }
   void insert(Node *cur, const string &str, int pos){
-    if (pos >= (int)str.size())
-    { cur->cnt++; return; }
-    int c = str[pos]-'a';
-    if (cur->go[c] == 0)
-      cur->go[c] = new_Node();
-    insert(cur->go[c],str,pos+1);
+  	for(int i=pos;i<str.size();i++){
+  		if(!cur->go[str[i]-'a'])
+  			cur->go[str[i]-'a'] = new_Node();
+  		cur=cur->go[str[i]-'a'];
+	  }
+	  cur->cnt++;
   }
   void make_fail(){
     queue<Node*> que;
     que.push(root);
     while (!que.empty()){
-      Node* fr=que.front();
-      que.pop();
+      Node* fr=que.front(); que.pop();
       for (int i=0; i<26; i++){
         if (fr->go[i]){
           Node *ptr = fr->fail;
           while (ptr && !ptr->go[i]) ptr = ptr->fail;
-          if (!ptr) fr->go[i]->fail = root;
-          else fr->go[i]->fail = ptr->go[i];
+          fr->go[i]->fail=ptr=(ptr?ptr->go[i]:root);
+          fr->go[i]->dic=(ptr->cnt?ptr:ptr->dic);
           que.push(fr->go[i]);
-        }
-      }
-    }
-  }
-};
+}}}}}AC;
