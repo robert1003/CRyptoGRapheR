@@ -1,13 +1,11 @@
 // given n*m 0-1 matrix
 // find a set of rows s.t. 
 // for each column, there's exactly one 1
-#include <stdio.h>
-#include <string.h>
 #define N 1024 //row
 #define M 1024 //column
 #define NM ((N+2)*(M+2))
 char A[N][M]; //n*m 0-1 matrix
-int used[N]; //answer: the row used
+bool used[N]; //answer: the row used
 int id[N][M];
 int L[NM],R[NM],D[NM],U[NM],C[NM],S[NM],ROW[NM];
 void remove(int c){
@@ -24,7 +22,7 @@ void resume(int c){
     }
   L[R[c]]=R[L[c]]=c;
 }
-int dfs(){
+bool dfs(){
   if(R[0]==0) return 1;
   int md=100000000,c;
   for( int i=R[0]; i!=0; i=R[i] )
@@ -41,7 +39,7 @@ int dfs(){
   resume(c);
   return 0;
 }
-int exact_cover(int n,int m){
+bool exact_cover(int n,int m){
   for( int i=0; i<=m; i++ ){
     R[i]=i+1; L[i]=i-1; U[i]=D[i]=i;
     S[i]=0; C[i]=i;
