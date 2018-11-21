@@ -26,7 +26,7 @@ struct Splay {
     if (ch[0] != &nil) ch[0]->f = this;
     if (ch[1] != &nil) ch[1]->f = this;
   }
-} Splay::nil, Splay::mem[MEM], *Splay::pmem = Splay::mem;
+}Splay::nil,Splay::mem[MEM],*Splay::pmem=Splay::mem;
 Splay *nil = &Splay::nil;
 void rotate(Splay *x){
   Splay *p = x->f;
@@ -63,8 +63,7 @@ Splay* access(Splay *x){
   return q;
 }
 void chroot(Splay *x){
-  access(x);
-  splay(x);
+  access(x),splay(x);
   x->rev ^= 1;
 }
 void link(Splay *x, Splay *y){
@@ -72,9 +71,7 @@ void link(Splay *x, Splay *y){
   y->f=x;
 }
 void cut_p(Splay *y) {
-  access(y);
-  splay(y);
-  y->push();
+  access(y),splay(y);
   y->ch[0] = y->ch[0]->f = nil;
 }
 void cut(Splay *x, Splay *y){
@@ -96,14 +93,11 @@ Splay* lca(Splay *x, Splay *y) {
   access(x);
   return access(y);
 }
-/*
-query(Splay *x,Splay *y){
-  setroot(y);
-  x=access(x);
-  return x->tag;
-}
-query(Splay *x,Splay *y){
+/* query(Splay *x,Splay *y){
+  setroot(y),x=access(x);
+  return x->size;
+}*/
+/* query(Splay *x,Splay *y){
   Splay *p=lca(x,y);
-  return p->tag+p->ch[1]->tag+(x!=p?x->tag:0);
-}
-*/
+  return p->val+p->ch[1]->size+(x!=p?x->size:0);
+}*/
