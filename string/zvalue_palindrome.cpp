@@ -1,29 +1,11 @@
-int len, zv[MAX*2];
-char ip[MAX], op[MAX*2];
-int main(){
-	cin >> ip; len = strlen(ip);
-	int l2 = len*2 - 1;
-	for(int i=0; i<l2; i++)
-		if(i&1) op[i] = '@';
-		else op[i] = ip[i/2];
-	int l=0, r=0; zv[0] = 1;
-	for(int i=1; i<l2; i++){
-		if( i > r ){
-			l = r = i;
-			while( l>0 && r<l2-1 && op[l-1] == op[r+1] )
-				l --, r ++;
-			zv[i] = (r-l+1);
-		}else{
-			int md = (l+r)/2, j = md + md - i;
-			zv[i] = zv[j];
-			int q = zv[i] / 2, nr = i + q;
-			if( nr == r ){
-				l = i + i - r;
-				while( l>0 && r<l2-1 && op[l-1] == op[r+1] )
-					l --, r ++;
-				zv[i] = r - l + 1;
-			}else if( nr > r )
-				zv[i] = (r - i) * 2 + 1;
-		}
-	}
+void z_value_pal(char *s,int len,int *z){
+  len=(len<<1)+1;
+  for(int i=len-1;i>=0;i--)
+    s[i]=i&1?s[i>>1]:'@';
+  z[0]=1;
+  for(int i=1,l=0,r=0;i<len;i++){
+    z[i]=i<r?min(z[l+l-i],r-i):1;
+    while(i-z[i]>=0&&i+z[i]<len&&s[i-z[i]]==s[i+z[i]])++z[i];
+    if(i+z[i]>r) l=i,r=i+z[i];
+  }
 }

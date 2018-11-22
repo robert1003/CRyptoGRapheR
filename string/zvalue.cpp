@@ -1,15 +1,8 @@
-char s[MAXN];
-int len,z[MAXN];
-void Z_value() {
-	int i,j,left,right;
-	left=right=0; z[0]=len;
-	for(i=1;i<len;i++) {
-		j=max(min(z[i-left],right-i),0);
-		for(;i+j<len&&s[i+j]==s[j];j++);
-		z[i]=j;
-		if(i+z[i]>right) {
-			right=i+z[i];
-			left=i;
-		}
-	}
+void z_value(char *s,int len,int *z){
+  z[0]=len;
+  for(int i=1,l=0,r=0;i<len;i++){
+    z[i]=i<r?(i-l+z[i-l]<z[l]?z[i-l]:r-i):0;
+    while(i+z[i]<len&&s[i+z[i]]==s[z[i]]) ++z[i];
+    if(i+z[i]>r) l=i,r=i+z[i];
+  }
 }
