@@ -1,25 +1,23 @@
-#define eps 1e-8
-class PY{ public:
-  int n;
-  Pt pt[5];
+struct PY{
+  int n; Pt pt[5]; double area;
   Pt& operator[](const int x){ return pt[x]; }
-  void input(){
-    int i; n=4;
-    for(i=0;i<n;i++) scanf("%lf%lf",&pt[i].x,&pt[i].y);
+  void init(){ //n,pt[0~n-1] must be filled
+  	area=getArea();
+  	if(area<0) reverse(pt,pt+n),area=-area;
   }
   double getArea(){
-    int i; double s=pt[n-1]^pt[0];
-    for(i=0;i<n-1;i++) s+=pt[i]^pt[i+1];
+    double s=pt[n-1]^pt[0];
+    for(int i=0;i<n-1;i++) s+=pt[i]^pt[i+1];
     return s/2;
   }
 };
 PY py[500];
 pair<double,int> c[5000];
 inline double segP(Pt &p,Pt &p1,Pt &p2){
-  if(SG(p1.x-p2.x)==0) return (p.y-p1.y)/(p2.y-p1.y);
+  if(dcmp(p1.x-p2.x)==0) return (p.y-p1.y)/(p2.y-p1.y);
   return (p.x-p1.x)/(p2.x-p1.x);
 }
-double polyUnion(int n){
+double polyUnion(int n){ //py[0~n-1] must be filled
   int i,j,ii,jj,ta,tb,r,d;
   double z,w,s,sum,tc,td;
   for(i=0;i<n;i++) py[i][py[i].n]=py[i][0];
@@ -32,8 +30,8 @@ double polyUnion(int n){
       for(j=0;j<n;j++){
         if(i==j) continue;
         for(jj=0;jj<py[j].n;jj++){
-          ta=SG(tri(py[i][ii],py[i][ii+1],py[j][jj]));
-          tb=SG(tri(py[i][ii],py[i][ii+1],py[j][jj+1]));
+          ta=dcmp(tri(py[i][ii],py[i][ii+1],py[j][jj]));
+          tb=dcmp(tri(py[i][ii],py[i][ii+1],py[j][jj+1]));
           if(ta==0 && tb==0){
             if((py[j][jj+1]-py[j][jj])*(py[i][ii+1]-py[i][ii])>0 && j<i){
               c[r++]=make_pair(segP(py[j][jj],py[i][ii],py[i][ii+1]),1);
@@ -62,18 +60,4 @@ double polyUnion(int n){
     }
   }
   return sum/2;
-}
-int main(){
-  int n,i,j,k;
-  double sum,ds;
-  scanf("%d",&n); sum=0;
-  for(i=0;i<n;i++){
-    py[i].input();
-    ds=py[i].getArea();
-    if(ds<0){
-      for(j=0,k=py[i].n-1;j<k;j++,k--) swap(py[i][j],
-          py[i][k]);
-      ds=-ds;
-    } sum+=ds;
-  } printf("%.9f\n",sum/polyUnion(n));
 }
