@@ -1,9 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define eps 1e-8
+#define dcmp(x) ((x>eps)-(x<-eps))
+struct Pt{
+	double x,y;
+	friend double operator^(const Pt &a,const Pt &b){
+		return a.x*b.y-a.y*b.x;
+	}
+	friend double operator*(const Pt &a,const Pt &b){
+		return a.x*b.x+a.y*b.y;
+	}
+	friend Pt operator-(const Pt &a,const Pt &b){
+		Pt ret;
+		ret.x=b.x-a.x,ret.y=b.y-a.y;
+		return ret;
+	}
+	friend double tri(const Pt &a,const Pt &b,const Pt &c){
+		return (b-a)^(c-a);
+	}
+};
 struct PY{
   int n; Pt pt[5]; double area;
   Pt& operator[](const int x){ return pt[x]; }
   void init(){ //n,pt[0~n-1] must be filled
-  	area=getArea();
-  	if(area<0) reverse(pt,pt+n),area=-area;
+  	if((area=getArea())<0)reverse(pt,pt+n),area=-area;
   }
   double getArea(){
     double s=pt[n-1]^pt[0];
@@ -60,4 +80,15 @@ double polyUnion(int n){ //py[0~n-1] must be filled
     }
   }
   return sum/2;
+}
+int main(){
+  int n,i,j,k;
+  double sum,ds;
+  scanf("%d",&n); sum=0;
+  for(i=0;i<n;i++){
+    cin>>py[i].n;
+    for(int j=0;j<py[i].n;j++) cin>>py[i][j].x>>py[i][j].y;
+    py[i].init();
+    sum+=py[i].area;
+  } printf("%.9f\n%.9f\n",sum,sum/polyUnion(n));
 }
