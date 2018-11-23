@@ -2,12 +2,9 @@ struct PY{
   int n; Pt pt[5]; double area;
   Pt& operator[](const int x){ return pt[x]; }
   void init(){ //n,pt[0~n-1] must be filled
-  	if((area=getArea())<0)reverse(pt,pt+n),area=-area;
-  }
-  double getArea(){
-    double s=pt[n-1]^pt[0];
-    for(int i=0;i<n-1;i++) s+=pt[i]^pt[i+1];
-    return s/2;
+  	area=pt[n-1]^pt[0];
+  	for(int i=0;i<n-1;i++) area+=pt[i]^pt[i+1];
+  	if((area/=2)<0)reverse(pt,pt+n),area=-area;
   }
 };
 PY py[500];
