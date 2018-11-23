@@ -1,10 +1,10 @@
-typedef long long LL;
-// Remember coefficient are mod P
-/* p=a*2^n+1
-   n		2^n 				p 				 a 		root
-   16 	65536 			65537 		 1 		3
-   20 	1048576		 	7340033 	 7 		3 */
-// (must be 2^k)
+/* p=a*2^k+1
+   p                     a      k      root
+   998244353             119    23     3
+   2013265921            15     27     31
+   2061584302081         15     37     7
+   2748779069441         5      39     3
+   1945555039024054273	 27     56     5 */
 template<LL P, LL root, int MAXN>
 struct NTT{
   static LL bigmod(LL a, LL b) {
@@ -24,8 +24,7 @@ struct NTT{
     for (int i=1; i<=MAXN; i++)
       omega[i] = (omega[i-1]*r)%P;
   }
-  // n must be 2^k
-  void tran(int n, LL a[], bool inv_ntt=false){
+  void tran(int n, LL a[], bool inv_ntt=false){//n=2^k
     int basic = MAXN / n , theta = basic;
     for (int m = n; m >= 2; m >>= 1) {
       int mh = m >> 1;
