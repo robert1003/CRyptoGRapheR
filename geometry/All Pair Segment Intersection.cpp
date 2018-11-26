@@ -39,7 +39,7 @@ vector<Pt> AllPairLLIntersect(){
 			if(it->SE!=NULL) pq.erase(it->SE);
 			s.erase(it++);
 			if(it!=s.begin()&&it!=s.end()){UPD(prev(it),it)}
-			else if(it!=s.begin()&&(--it)->SE!=NULL) DEL(it);
+			else if(it!=s.begin()&&(--it)->SE!=NULL)DEL(it);
 		}
 		else{
 			auto it=s.lower_bound(cur.a); //it->FI==cur.a
