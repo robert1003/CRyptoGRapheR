@@ -2,18 +2,18 @@ struct event{
 	Pt pt;int t,a,b; //sort by greater<pt.x>
 	event(Pt &pt,int t,int a,int b=-1):pt(pt),t(t),a(a),b(b){}
 };
-vector<Line> lines; //must be filled
+vector<Line> LA; //must be filled
 double cx=-1e9;
 struct cmp{
 	bool operator()(int a,int b){
-		return lines[a].eval(cx)<lines[b].eval(cx);
+		return LA[a].eval(cx)<LA[b].eval(cx);
 	} //line.eval(x)=s.y+(e.y-s.y)*(x-s.x)/(e.x-s.x)
 };
 #define FI first
 #define SE second
 #define DEL(it) pq.erase(it->SE),it->SE=NULL;
 #define UPD(cit,nit) \
-Line A=lines[cit->FI],B=lines[nit->FI];\
+Line A=LA[cit->FI],B=LA[nit->FI];\
 if(cit->SE!=NULL) DEL(cit)\
 Pt tmp=LLIntersect(A,B);\
 if(!isnan(tmp.x)&&tmp.x>=cur.pt.x)\
@@ -23,8 +23,8 @@ cit->SE=pq.push({tmp,2,cit->FI,nit->FI});
 vector<Pt> AllPairLLIntersect(){
 	__gnu_pbds::priority_queue<event> pq;
 	map<int,__gnu_pbds::priority_queue<event>::point_iterator,cmp> s;
-	for(int i=0;i<lines.size();i++){ //s.x < e.x
-		pq.push({lines[i].s,0,i}),pq.push({lines[i].e,1,i});
+	for(int i=0;i<LA.size();i++){ //s.x < e.x
+		pq.push({LA[i].s,0,i}),pq.push({LA[i].e,1,i});
 	}
 	vector<Pt> res;
 	while(!pq.empty()){
