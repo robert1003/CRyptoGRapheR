@@ -6,5 +6,5 @@ Pt SSIntersect(Line a, Line b) {
   Pt p1 = a.s, p2 = a.e, q1 = b.s, q2 = b.e;
   Pt p = LLIntersect(a, b);
   if(!isnan(p.x)&&onseg(p, a)&&onseg(p, b)) return p;
-  return {nan(""), nan("")};
+  return {NAN,NAN};
 }
