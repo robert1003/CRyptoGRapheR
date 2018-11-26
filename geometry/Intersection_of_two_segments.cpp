@@ -5,6 +5,6 @@ bool onseg(Pt p, Line L) {
 Pt SSIntersect(Line a, Line b) {
   Pt p1 = a.s, p2 = a.e, q1 = b.s, q2 = b.e;
   Pt p = LLIntersect(a, b);
-  if(!isnan(p.x) && onseg(p, a) && onseg(p, b)) return q;
-  return Pt(nan(""), nan(""));
+  if(!isnan(p.x) && onseg(p, a) && onseg(p, b)) return p;
+  return {nan(""), nan("")};
 }
