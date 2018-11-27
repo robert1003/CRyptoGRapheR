@@ -1,7 +1,7 @@
 #define SOURCE 0
 #define SINK 1
 const unsigned int inf=4000000000u;
-int n,m,deg[MAXN],adj[MAXN][MAXN];
+int n,deg[MAXN],adj[MAXN][MAXN]; //n,deg,adj,cap
 unsigned int res[MAXN][MAXN],cap[MAXN][MAXN];
 int nei[MAXN],gdeg[MAXN],gadj[MAXN][MAXN];
 unsigned int gres[MAXN][MAXN];
