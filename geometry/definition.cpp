@@ -1,23 +1,27 @@
+int dcmp(double x) {
+    if(abs(x) < eps) return 0;
+    else return x < 0 ? -1 : 1;
+}
 struct Pt {
   double x, y;
   Pt(double _x=0, double _y=0):x(_x), y(_y) {}
 
-  Pt operator+(const Pt& a) {
+  Pt operator+(const Pt& a) const {
     return Pt(x+a.x, y+a.y);
   }
-  Pt operator-(const Pt& a) {
+  Pt operator-(const Pt& a) const {
     return Pt(x-a.x, y-a.y);
   }
-  Pt operator*(double a) {
+  Pt operator*(double a) const {
     return Pt(x*a, y*a);
   }
-  Pt operator/(double a) {
+  Pt operator/(double a) const {
     return Pt(x/a, y/a);
   }
-  double operator*(const Pt& a) {
+  double operator*(const Pt& a) const {
     return x*a.x + y*a.y;
   }
-  double operator^(const Pt& a) {
+  double operator^(const Pt& a) const {
     return x*a.y - y*a.x;
   }
 };
@@ -25,7 +29,7 @@ double norm2(const Pt& a) {
   return a*a;
 }
 double norm(const Pt& a) {
-  sqrt(norm2(a));
+  return sqrt(norm2(a));
 }
 Pt perp(const Pt& a) {
   return Pt(-a.y, a.x);
@@ -41,7 +45,7 @@ struct Line {
 
   bool operator<(const Line& L) const {
     return ang < L.ang;
-  } 
+  }
 };
 
 struct Circle {
