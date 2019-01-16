@@ -8,8 +8,8 @@ struct Dinic{
     for (int i=0; i<n; i++) E[i].clear();
   }
   void add_edge(int u, int v, int f){
-    E[u].PB({v,f,SZ(E[v])});
-    E[v].PB({u,0,SZ(E[u])-1});
+    E[u].PB({v,f,(int)E[v].size()});
+    E[v].PB({u,0,(int)E[u].size()-1});
   }
   bool BFS(){
     for (int i=0; i<n; i++) level[i] = -1;
@@ -18,7 +18,7 @@ struct Dinic{
     level[s] = 0;
     while (!que.empty()){
       int u = que.front(); que.pop();
-      for (auto it : E[u]){
+      for (auto &it : E[u]){
         if (it.f > 0 && level[it.v] == -1){
           level[it.v] = level[u]+1;
           que.push(it.v);
