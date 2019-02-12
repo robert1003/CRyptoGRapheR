@@ -5,6 +5,7 @@
 // 2, 325, 9375, 28178, 450775, 9780504, 1795265022
 // Make sure testing integer is in range [2, n−2] if
 // you want to use magic.
+// will over flow. use __int128
 bool witness(LL a,LL n,LL u,int t){
 	if(!a) return 0;
 	LL x=mypow(a,u,n);
