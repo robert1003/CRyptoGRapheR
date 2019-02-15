@@ -1,5 +1,5 @@
 ld PCIntersect(vector<Pt> v, Circle cir) {
-  for(int i = 0 ; i < (int)v.size() ; ++i) v[i] -= cir.o;
+  for(int i = 0 ; i < (int)v.size() ; ++i) v[i] = v[i] - cir.o;
   ld ans = 0, r = cir.r;
   int n = v.size();
   for(int i = 0 ; i < n ; ++i) {
@@ -8,8 +8,14 @@ ld PCIntersect(vector<Pt> v, Circle cir) {
     if(norm(pb) < eps) continue;
     ld s, h, theta;
     ld a = norm(pb), b = norm(pa), c = norm(pb-pa);
-    ld cosB = (pb*(pb-pa))/a/c, B = acos(cosB);
-    ld cosC = (pa*pb)/a/b, C = acos(cosC);
+    ld cosB = (pb*(pb-pa))/a/c, B;
+    if(dcmp(cosB-1) == 0) B = acos(1);
+    else if(dcmp(cosB+1) == 0) B = acos(-1);
+    else B = acos(cosB);
+    ld cosC = (pa*pb)/a/b, C;
+    if(dcmp(cosC-1) == 0) C = acos(1);
+    else if(dcmp(cosC+1) == 0) C = acos(-1);
+    else C = acos(cosC);
     if(a > r) {
       s = (C/2)*r*r;
       h = a*b*sin(C)/c;
