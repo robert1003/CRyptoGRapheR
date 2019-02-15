@@ -13,7 +13,7 @@ ld PCIntersect(vector<Pt> v, Circle cir) {
     if(a > r) {
       s = (C/2)*r*r;
       h = a*b*sin(C)/c;
-      if(h < r && B < PI/2) S -= (acos(h/r)*r*r - h*sqrt(r*r-h*h));
+      if(h < r && B < PI/2) s -= (acos(h/r)*r*r - h*sqrt(r*r-h*h));
     }
     else if(b > r) {
       theta = PI - B - asin(sin(B)/r*a);
