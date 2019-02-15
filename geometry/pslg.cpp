@@ -1,9 +1,19 @@
+// <: dcmp(x-a.x) < 0 || (dcmp(x-a.x) == 0 && dcmp(y-a.y) < 0)
+// ==: dmcp(x-a.x)==0&&dcmp(y-a.y)==0
+ld poly_area(vector<Pt> &v) {
+  ld area = 0; int n = v.size();
+  for(int i = 0 ; i < n-1 ; ++i) {
+    area += (v[i]-v[0])^(v[(i+1)%n]-v[0]);
+  }
+  return area/2;
+}
 struct PSLG {
+#define PB push_back
 #define maxn 300000
   struct Edge {
-    int u, v; double ang;
-    Edge(int _u, int _v, double _ang):u(_u), v(_v), ang(_ang) {}
-    
+    int u, v; ld ang;
+    Edge(int _u, int _v, ld _ang):u(_u), v(_v), ang(_ang) {}
+
     bool operator<(const Edge& e) const {
       return ang < e.ang;
     }
@@ -14,19 +24,20 @@ struct PSLG {
   vector<int> G[maxn];
   int vis[maxn*2], left[maxn*2], prev[maxn*2];
   vector<vector<Pt> > faces;
-  
+  ld area[maxn];
+
   void init(int _n) {
     n = _n;
     for(int i = 0 ; i < n ; i++) G[i].clear();
     edges.clear();
     faces.clear();
   }
-  
-  double getang(int from, int to) {
+
+  ld getang(int from, int to) {
     Pt x = v[to]-v[from];
     return atan2(x.y, x.x);
   }
-  
+
   void addedge(int from, int to) {
     edges.PB(Edge(from, to, getang(from, to)));
     edges.PB(Edge(to, from, getang(to, from)));
@@ -34,19 +45,19 @@ struct PSLG {
     G[from].PB(m-2);
     G[to].PB(m-1);
   }
-  
+
   void build() {
     for(int u = 0 ; u < n ; u++) {
-      sort(G[u].begin(), G[u].end(), [=](int a, int b){return edges[a] < edges[b];});
-      for(int i = 0 ; i < G[u].size() ; i++) {
+      sort(G[u].begin(), G[u].end(), [&](int a, int b){return edges[a] < edges[b];});
+      for(int i = 0 ; i < (int)G[u].size() ; i++) {
         prev[G[u][(i+1)%G[u].size()]] = G[u][i];
       }
     }
-    
+
     memset(vis, 0, sizeof(int)*(edges.size()+5));
     face_cnt = 0;
     for(int u = 0 ; u < n ; u++) {
-      for(int i = 0 ; i < G[u].size() ; i++) {
+      for(int i = 0 ; i < (int)G[u].size() ; i++) {
         int e = G[u][i];
         if(!vis[e]) {
           face_cnt++;
@@ -63,6 +74,8 @@ struct PSLG {
         }
       }
     }
+
+    for(int i = 0 ; i < face_cnt ; ++i) area[i] = poly_area(faces[i]);
   }
 } pslg;
 int ID(Pt p, vector<Pt>& v) {
@@ -71,12 +84,13 @@ int ID(Pt p, vector<Pt>& v) {
 void build_graph(vector<Line>& seg) {
   // get points
   vector<Pt> vp;
-  vector<double> dis[maxn];
+  vector<ld> dis[maxn];
+  int n = seg.size();
   
-  for(int i = 0 ; i < n+4 ; i++) {
+  for(int i = 0 ; i < n ; i++) {
     vp.PB(seg[i].s); vp.PB(seg[i].e);
-    for(int j = i+1 ; j < n+4 ; j++) {
-      Pt p = SSIntersect(seg[i].s, seg[i].e, seg[j].s, seg[j].e);
+    for(int j = i+1 ; j < n ; j++) {
+      Pt p = SSIntersect(seg[i], seg[j]);
       if(!isnan(p.x)) {
         vp.PB(p);
         dis[i].PB(norm(p-seg[i].s));
@@ -91,19 +105,18 @@ void build_graph(vector<Line>& seg) {
   pslg.v = vp;
   
   // get edges
-  for(int i = 0; i < n+4 ; i++) {
-    double len = norm(seg[i].v);
+  for(int i = 0; i < n ; i++) {
+    ld len = norm(seg[i].v);
     dis[i].PB(0), dis[i].PB(len);
     sort(dis[i].begin(), dis[i].end());
-    dis[i].resize(unique(dis[i].begin(), dis[i].end()) - dis[i].begin());
     int sz = (int)dis[i].size();
     for(int j = 1 ; j < sz ; j++) {
       Pt a = seg[i].s + seg[i].v*dis[i][j-1]/len;
       Pt b = seg[i].s + seg[i].v*dis[i][j]/len;
+      if(a == b) continue;
       pslg.addedge(ID(a, vp), ID(b, vp));
     }
   }
   
   pslg.build();
 }
-
