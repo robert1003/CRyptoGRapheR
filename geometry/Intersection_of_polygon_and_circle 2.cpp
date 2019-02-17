@@ -5,17 +5,15 @@ ld PCIntersect(vector<Pt> v, Circle cir) {
   for(int i = 0 ; i < n ; ++i) {
     Pt pa = v[i], pb = v[(i+1)%n];
     if(norm(pa) < norm(pb)) swap(pa, pb);
-    if(norm(pb) < eps) continue;
+    if(dcmp(norm(pb)) == 0) continue;
     ld s, h, theta;
     ld a = norm(pb), b = norm(pa), c = norm(pb-pa);
-    ld cosB = (pb*(pb-pa))/a/c, B;
-    if(dcmp(cosB-1) == 0) B = acos(1);
-    else if(dcmp(cosB+1) == 0) B = acos(-1);
-    else B = acos(cosB);
-    ld cosC = (pa*pb)/a/b, C;
-    if(dcmp(cosC-1) == 0) C = acos(1);
-    else if(dcmp(cosC+1) == 0) C = acos(-1);
-    else C = acos(cosC);
+    ld cosB = (pb*(pb-pa))/a/c, B = acos(cosB);
+    if(cosB > 1) B = 0;
+    else if(cosB < -1) B = PI; 
+    ld cosC = (pa*pb)/a/b, C = acos(cosC);
+    if(cosC > 1) C = 0;
+    else if(cosC < -1) C = PI;
     if(a > r) {
       s = (C/2)*r*r;
       h = a*b*sin(C)/c;
