@@ -57,7 +57,6 @@ void suffix_array(int* ip, int len) {
   }
   for(int i=0; i<len-1; i++) { // exclude the padding zero
     RA[SA[i]] = i;
-    cout << i << ' ' << SA[i] << ' ' << RA[SA[i]] << '\n';
   }
   // resulting height, sa array \in [0,len)
 }
