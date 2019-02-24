@@ -24,12 +24,12 @@ struct SA{
     int nn = 0, nmxz = -1, *nsa = sa + n, *ns = s + n, lst = -1;
 #define MS0(x,n) memset((x),0,n*sizeof(*(x)))
 #define MAGIC(XD) MS0(sa, n); \
-    memcpy(x, c, sizeof(int) * z); \
-    XD; \
-    memcpy(x + 1, c, sizeof(int) * (z - 1)); \
-    REP(i,n) if(sa[i] && !t[sa[i]-1]) sa[x[s[sa[i]-1]]++] = sa[i]-1; \
-    memcpy(x, c, sizeof(int) * z); \
-    for(int i = n - 1; i >= 0; i--) if(sa[i] && t[sa[i]-1]) sa[--x[s[sa[i]-1]]] = sa[i]-1;
+memcpy(x, c, sizeof(int) * z); \
+XD; \
+memcpy(x + 1, c, sizeof(int) * (z - 1)); \
+REP(i,n) if(sa[i] && !t[sa[i]-1]) sa[x[s[sa[i]-1]]++] = sa[i]-1; \
+memcpy(x, c, sizeof(int) * z); \
+for(int i = n - 1; i >= 0; i--) if(sa[i] && t[sa[i]-1]) sa[--x[s[sa[i]-1]]] = sa[i]-1;
     MS0(c, z);
     REP(i,n) uniq &= ++c[s[i]] < 2;
     REP(i,z-1) c[i+1] += c[i];
@@ -44,16 +44,20 @@ struct SA{
     MAGIC(for(int i = nn - 1; i >= 0; i--) sa[--x[s[p[nsa[i]]]]] = p[nsa[i]]);
   }
 }sa;
-int H[ N ], SA[ N ];
+int H[N], SA[N], RA[N];
 void suffix_array(int* ip, int len) {
   // should padding a zero in the back
   // ip is int array, len is array length
   // ip[0..n-1] != 0, and ip[len] = 0
   ip[len++] = 0;
   sa.build(ip, len, 128);
-  for (int i=0; i<len; i++) {
+  for(int i=0; i<len; i++) {
     H[i] = sa.hei[i + 1];
     SA[i] = sa._sa[i + 1];
+  }
+  for(int i=0; i<len-1; i++) { // exclude the padding zero
+    RA[SA[i]] = i;
+    cout << i << ' ' << SA[i] << ' ' << RA[SA[i]] << '\n';
   }
   // resulting height, sa array \in [0,len)
 }
