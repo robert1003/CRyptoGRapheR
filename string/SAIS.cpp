@@ -51,12 +51,8 @@ void suffix_array(int* ip, int len) {
   // ip[0..n-1] != 0, and ip[len] = 0
   ip[len++] = 0;
   sa.build(ip, len, 128);
-  for(int i=0; i<len; i++) {
-    H[i] = sa.hei[i + 1];
-    SA[i] = sa._sa[i + 1];
-  }
-  for(int i=0; i<len-1; i++) { // exclude the padding zero
-    RA[SA[i]] = i;
-  }
+  memcpy(H,sa.hei+1,len<<2);
+  memcpy(SA,sa._sa+1,len<<2);
+  for(int i=0; i<len; i++) RA[i] = sa.r[i]-1;
   // resulting height, sa array \in [0,len)
 }
