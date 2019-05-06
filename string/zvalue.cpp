@@ -1,4 +1,4 @@
-void z_value(char *s,int len,int *z){
+void z_value(const char *s,int len,int *z){
   z[0]=len;
   for(int i=1,l=0,r=0;i<len;i++){
     z[i]=i<r?(i-l+z[i-l]<z[l]?z[i-l]:r-i):0;
