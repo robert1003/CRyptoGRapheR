@@ -2,7 +2,7 @@ struct event{
 	Pt pt;int t,a,b; //sort by greater<pt.x>
 	event(Pt &pt,int t,int a,int b=-1):pt(pt),t(t),a(a),b(b){}
 };
-vector<Line> LA; //must be filled
+vector<Line> LA; //must be filled and s.x<e.x
 double cx=-1e9;
 struct cmp{
 	bool operator()(int a,int b){
