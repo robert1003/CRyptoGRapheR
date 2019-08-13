@@ -1,4 +1,4 @@
-const int N = 514, E = (2e5) * 2;
+const int N = 100005, E = (2e5) * 2 + 40;
 struct Graph{
   int to[E],bro[E],head[N],e;
   int lnk[N],vis[N],stp,n;
@@ -18,12 +18,13 @@ struct Graph{
       if(!lnk[v]){
         lnk[x]=v,lnk[v]=x;
         return true;
-      }else if(vis[lnk[v]]<stp){
+      }
+    } for(int i=head[x];i;i=bro[i]){
+      int v=to[i];
+      if(vis[lnk[v]]<stp){
         int w=lnk[v];
         lnk[x]=v,lnk[v]=x,lnk[w]=0;
-        if(dfs(w)){
-          return true;
-        }
+        if(dfs(w)) return true;
         lnk[w]=v,lnk[v]=w,lnk[x]=0;
       }
     }
@@ -31,10 +32,8 @@ struct Graph{
   }
   int solve(){
     int ans = 0;
-    for(int i=1;i<=n;i++)
-      if(!lnk[i]){
-        stp++; ans += dfs(i);
-      }
+    for(int i=1;i<=n;i++) if(!lnk[i])
+        stp++, ans += dfs(i);
     return ans;
   }
 } graph;
