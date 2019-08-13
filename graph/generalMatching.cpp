@@ -1,3 +1,4 @@
+// should shuffle vertices and edges
 const int N = 100005, E = (2e5) * 2 + 40;
 struct Graph{
   int to[E],bro[E],head[N],e;
