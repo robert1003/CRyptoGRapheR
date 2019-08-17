@@ -18,7 +18,7 @@ inline LL pw( LL x , LL k ) {
     if( k&1 ) res = ( res * bs ) % MOD;
   return res;
 }
-inline LL inv( LL x ) {
+inline LL invf( LL x ) {
   return pw( x , MOD-2 );
 }
 inline void fwt( LL x[ MAXN ] , int N , bool inv=0 ) {
@@ -33,9 +33,10 @@ inline void fwt( LL x[ MAXN ] , int N , bool inv=0 ) {
         if( x[ j ] < 0 ) x[ j ] += MOD;
       }
   }
+  LL invN = invf( N );
   if( inv )
     for( int i = 0 ; i < N ; i++ ) {
-      x[ i ] *= inv( N );
+      x[ i ] *= invN;
       x[ i ] %= MOD;
     }
 }
