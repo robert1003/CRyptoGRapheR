@@ -1,3 +1,4 @@
+// for point or line solution, change > to >=
 bool onleft(Line L, Pt p) {
 	return dcmp(L.v^(p-L.s)) > 0;
 }
