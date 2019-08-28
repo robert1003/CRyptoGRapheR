@@ -21,11 +21,11 @@ struct Scc{
   void solve(){
     nScc = 0;
     vec.clear();
-    FZ(vst);
+    memset(vst, 0, sizeof(vst));
     for (int i=0; i<n; i++)
       if (!vst[i]) DFS(i);
     reverse(vec.begin(),vec.end());
-    FZ(vst);
+    memset(vst, 0, sizeof(vst));
     for (auto v : vec)
       if (!vst[v]){
         rDFS(v); nScc++;
