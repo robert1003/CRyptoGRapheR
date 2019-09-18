@@ -1,38 +1,36 @@
-// global min cut
-struct SW{ // O(V^3)
-	static const int MXN = 514;
-	int n,vst[MXN],del[MXN];
-	int edge[MXN][MXN],wei[MXN];
-	void init(int _n){
-		n = _n; FZ(edge); FZ(del);
-	}
-	void addEdge(int u, int v, int w){
-		edge[u][v] += w; edge[v][u] += w;
-	}
-	void search(int &s, int &t){
-		FZ(vst); FZ(wei);
-		s = t = -1;
-		while (true){
-			int mx=-1, cur=0;
-			for (int i=0; i<n; i++)
-				if (!del[i] && !vst[i] && mx<wei[i])
-					cur = i, mx = wei[i];
-			if (mx == -1) break;
-			vst[cur] = 1;
-			s = t; t = cur;
-			for (int i=0; i<n; i++)
-				if (!vst[i] && !del[i]) wei[i] += edge[cur][i];
-		}
-	}
-	int solve(){
-		int res = 2147483647;
-		for (int i=0,x,y; i<n-1; i++){
-			search(x,y);
-			res = min(res,wei[y]);
-			del[y] = 1;
-			for (int j=0; j<n; j++)
-				edge[x][j] = (edge[j][x] += edge[y][j]);
-		}
-		return res;
-	}
-}graph;
+const int INF=0x3f3f3f3f;
+template<typename T>
+struct stoer_wagner{// 0-base
+  static const int MAXN=501;
+  T g[MAXN][MAXN],dis[MAXN];
+  int nd[MAXN],n,s,t;
+  void init(int _n){
+    n=_n;
+    for(int i=0;i<n;++i)
+      for(int j=0;j<n;++j)g[i][j]=0;
+  }
+  void add_edge(int u,int v,T w){
+    g[u][v]=g[v][u]+=w;
+  }
+  T min_cut(){
+    T ans=INF;
+    for(int i=0;i<n;++i)nd[i]=i;
+    for(int ind,tn=n;tn>1;--tn){
+      for(int i=1;i<tn;++i)dis[nd[i]]=0;
+      for(int i=1;i<tn;++i){
+        ind=i;
+        for(int j=i;j<tn;++j){
+          dis[nd[j]]+=g[nd[i-1]][nd[j]];
+          if(dis[nd[ind]]<dis[nd[j]])ind=j;
+        }
+        swap(nd[ind],nd[i]);
+      }
+      if(ans>dis[nd[ind]])
+        ans=dis[t=nd[ind]],s=nd[ind-1];
+      for(int i=0;i<tn;++i)
+        g[nd[ind-1]][nd[i]]=g[nd[i]][nd[ind-1]]
+                            +=g[nd[i]][nd[ind]];
+    }
+    return ans;
+  }
+};
