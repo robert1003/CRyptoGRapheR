@@ -1,4 +1,4 @@
-const ll mod = 998244353;
+// Usage: linearRec({0, 1}, {1, 1}, k) //k'th fib
 typedef vector<ll> Poly;
 ll linearRec(Poly S, Poly tr, ll k) {
   int n = tr.size();
