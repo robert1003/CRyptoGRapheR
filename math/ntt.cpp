@@ -35,7 +35,7 @@ struct NTT{
           LL x = a[j] - a[k];
           if (x < 0) x += P;
           a[j] += a[k];
-          if (a[j] > P) a[j] -= P;
+          if (a[j] >= P) a[j] -= P;
           a[k] = (w * x) % P;
         }
       }
