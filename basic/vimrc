@@ -1,6 +1,11 @@
 syn on
-se ai nu ru cul mouse=a
-se cin et ts=4 sw=4 sts=4
+se ai nu relativenumber ru cul mouse=a
+se cin et ts=2 sw=2 sts=2
 so $VIMRUNTIME/mswin.vim
 colo desert
 se gfn=Monospace\ 14
+filet plugin indent on
+no <F5> :!./a.out<CR>
+no <F6> :!./a.out < input.txt<CR>
+no <F9> :!g++ -O2 -std=gnu++14 -lm % -g -fsanitize=undefined -Wall -Wextra -Wshadow -Wno-unused-result<CR>
+
