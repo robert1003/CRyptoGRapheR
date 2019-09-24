@@ -1,7 +1,9 @@
 #define SOURCE 0
 #define SINK 1
 const unsigned int inf=4000000000u;
-int n,deg[MAXN],adj[MAXN][MAXN]; //n,deg,adj,cap
+//adj:adj list(size=deg);cap[u][v]:cap of edge (u,v)
+//result:cut[u][v]:u-v mincut;gadj,gdeg,gres:cut tree
+int n,deg[MAXN],adj[MAXN][MAXN]; //fill n,deg,adj,cap
 unsigned int res[MAXN][MAXN],cap[MAXN][MAXN];
 int nei[MAXN],gdeg[MAXN],gadj[MAXN][MAXN];
 unsigned int gres[MAXN][MAXN];
