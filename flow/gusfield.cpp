@@ -3,7 +3,7 @@
 const unsigned int inf=4000000000u;
 //adj:adj list(size=deg);cap[u][v]:cap of edge (u,v)
 //result:cut[u][v]:u-v mincut;gadj,gdeg,gres:cut tree
-int n,deg[MAXN],adj[MAXN][MAXN]; //fill n,deg,adj,cap
+int n,m,deg[MAXN],adj[MAXN][MAXN];//fill n,deg,adj,cap
 unsigned int res[MAXN][MAXN],cap[MAXN][MAXN];
 int nei[MAXN],gdeg[MAXN],gadj[MAXN][MAXN];
 unsigned int gres[MAXN][MAXN];
@@ -51,7 +51,8 @@ inline unsigned int maxflow(int src,int sink) {
   int i,j;
   unsigned int f=0;
   for(i=0;i<n;i++) {
-    for(j=0;j<deg[i];j++) res[i][adj[i][j]]=cap[i][adj[i][j]];
+    for(j=0;j<deg[i];j++) 
+		res[i][adj[i][j]]=cap[i][adj[i][j]];
     cutset[i]=SINK;
   }
   while(bfs(src,sink)) {
