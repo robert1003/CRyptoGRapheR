@@ -33,3 +33,9 @@ If maxflow < S * |V|, D is an answer.
 
 Requiring subgraph: all vertex can be reached from source with
 edge whose cap > 0.
+
+Maximum closed subgraph
+1. connect source with positive weighted vertex(capacity=weight)
+2. connect sink with negitive weighted vertex(capacity=-weight)
+3. make capacity of the original edges = inf
+4. ans = sum(positive weighted vertex's weight) - max flow
