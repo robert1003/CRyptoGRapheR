@@ -10,7 +10,7 @@ General Graph:
 |Max Ind. Set| + |Min Vertex Cover| = |V|
 |Max Ind. Edge Set| + |Min Edge Cover| = |V|
 Bipartite Graph:
-|Max Ind. Set| = |Min Edge Cover|
+|Max Ind. Set| = |Min Edge Cover| = |Min Path Cover|
 |Max Ind. Edge Set| = |Min Vertex Cover|
 
 To reconstruct the minimum vertex cover, dfs from each
