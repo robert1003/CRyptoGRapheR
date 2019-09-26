@@ -1,0 +1,2 @@
+Manhattan MST
+For each point, consider the points that surround it(8 octants). Then, connect it with the closest point. For example, consider 45~90. For each point p, the closest point is min{x+y | x-y >= p.x-p.y, x >= p.x }. Finally, the answer is this new graphs(E=4N) MST.
