@@ -8,8 +8,8 @@ struct Maxflow {
       v(_v), c(_c), r(_r) {}
   };
   int s, t;
-  vector<Edge> G[MAXV*2];
-  int iter[MAXV*2], d[MAXV*2], gap[MAXV*2], tot;
+  vector<Edge> G[MAXV];
+  int iter[MAXV], d[MAXV], gap[MAXV], tot;
   void init(int x) {
     tot = x+2;
     s = x+1, t = x+2;
