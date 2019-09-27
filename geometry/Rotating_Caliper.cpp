@@ -16,6 +16,6 @@ double diameter(vector<Pt>& p) {
             v = (v+1)%n;
         }
     }
-    v.pop_back();
+    p.pop_back();
     return maxdis;
 }

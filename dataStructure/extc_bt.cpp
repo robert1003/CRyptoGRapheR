@@ -1,8 +1,9 @@
-#include <bits/extc++.h>
+#include<bits/extc++.h>
 using namespace __gnu_pbds;
+#include<ext/pb_ds/assoc_container.hpp>
 typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> set_t;
-#include <ext/pb_ds/assoc_container.hpp>
 typedef cc_hash_table<int,int> umap_t;
+#include<ext/pb_ds/priority_queue.hpp>
 typedef priority_queue<int> heap;
 #include<ext/rope>
 using namespace __gnu_cxx;
@@ -21,9 +22,7 @@ int main(){
   assert(*s.find_by_order(0) == 505);
   // The order of the keys should be: 505.
   assert(s.order_of_key(505) == 0);
-
   heap h1 , h2; h1.join( h2 );
-
   rope<char> r[ 2 ];
   r[ 1 ] = r[ 0 ]; // persistenet
   string t = "abc";

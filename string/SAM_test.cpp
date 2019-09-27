@@ -1,23 +1,31 @@
-const int MAXM = 1000010;
+// any path start from root forms a substring of S
+// occurrence of P : iff SAM can run on input word P
+// number of different substring : ds[1]-1
+// total length of all different substring : dsl[1]
+// max/min length of state i : mx[i]/mx[mom[i]]+1
+// assume a run on input word P end at state i:
+// number of occurrences of P : cnt[i]
+// first occurrence position of P : fp[i]-|P|+1
+// all position of P : fp of "dfs from i through rmom"
+const int MXM = 1000010;
 struct SAM{
-  int tot, root, lst, mom[MAXM], mx[MAXM];
-  int acc[MAXM], nxt[MAXM][33];
+  int tot, root, lst, mom[MXM], mx[MXM]; //ind[MXM]
+  int nxt[MXM][33]; //cnt[MXM],ds[MXM],dsl[MXM],fp[MXM]
   int newNode(){
     int res = ++tot;
     fill(nxt[res], nxt[res]+33, 0);
-    mom[res] = mx[res] = acc[res] = 0;
+    mom[res] = mx[res] = 0; //cnt=ds=dsl=fp=0
     return res;
   }
   void init(){
     tot = 0;
     root = newNode();
-    mom[root] = 0, mx[root] = 0;
     lst = root;
   }
   void push(int c){
     int p = lst;
-    int np = newNode();
-    mx[np] = mx[p]+1;
+    int np = newNode(); //cnt[np]=1
+    mx[np] = mx[p]+1; //fp[np]=mx[np]-1
     for(; p && nxt[p][c] == 0; p = mom[p])
       nxt[p][c] = np;
     if(p == 0) mom[np] = root;
@@ -25,7 +33,7 @@ struct SAM{
       int q = nxt[p][c];
       if(mx[p]+1 == mx[q]) mom[np] = q;
       else{
-        int nq = newNode();
+        int nq = newNode(); //fp[nq]=fp[q]
         mx[nq] = mx[p]+1;
         for(int i = 0; i < 33; i++)
           nxt[nq][i] = nxt[q][i];
@@ -39,12 +47,39 @@ struct SAM{
     lst = np;
   }
   void print(){
+  	calc();
+  	dfs();
+    cout<<ds[1]-1<<" "<<dsl[1]<<"\n";
     REP(i, 1, tot){
       printf("node %d :\n", i);
       printf("mx %d, mom %d\n", mx[i], mom[i]);
       REP(j, 1, 26) if(nxt[i][j])
         printf("nxt %c %d\n", 'a'+j-1, nxt[i][j]);
       puts("---------------------------");
+    }
+  }
+  void dfs(int x=1,string s=""){
+  	cout<<x<<":"<<s<<" "<<mx[x]<<" "<<fp[x]<<" "<<cnt[x]<<"\n";
+  	for(int i=1;i<+26;i++){
+  		if(nxt[x][i]){
+  			dfs(nxt[x][i],s+(char)(i+'a'-1));
+		  }
+	  }
+  }
+  void calc(){
+    calc(root);
+    iota(ind,ind+tot,1);
+    sort(ind,ind+tot,[&](int i,int j){return mx[i]<mx[j];});
+    for(int i=tot-1;i>=0;i--) cnt[mom[ind[i]]]+=cnt[ind[i]];
+  }
+  void calc(int x){
+    ds[x]=1; dsl[x]=0; rmom[mom[x]].push_back(x);
+    for(int i=1;i<=26;i++){
+      if(nxt[x][i]){
+        calc(nxt[x][i]);
+        ds[x]+=ds[nxt[x][i]];
+        dsl[x]+=ds[nxt[x][i]]+dsl[nxt[x][i]];
+      }
     }
   }
   void push(char *str){
