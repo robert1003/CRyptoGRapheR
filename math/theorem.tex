@@ -24,7 +24,9 @@
   2. SG value of some subgame $>$ $1$ and SG value of the game $\neq$ $0$
 \item Möbius inversion formula :\\
   $g(n) = \sum\limits_{d|n}f(d)$ for every integer $n\ge 1$ , then\\
-  $f(n) = \sum\limits_{d|n}\mu(d)g(\frac{n}{d})$ for every integer $n\ge 1$
+  $f(n) = \sum\limits_{d|n}\mu(d)g(\frac{n}{d}) = \sum\limits_{d|n}\mu(\frac{n}{d})g(d)$ for every integer $n\ge 1$\\
+  $\sum\limits_{d|n}\mu(d)=\epsilon(n)=[n=1]$ , 
+  $\sum\limits_{d|n}\phi(d)=n\Leftrightarrow \phi(n)=\sum\limits_{d|n}\mu(d)(\frac{n}{d})$
 \item Find a Primitive Root of $n$:\\
   $n$ has primitive roots iff $n=2,4,p^k,2p^k$ where $p$ is an odd prime.\\
   1. Find $\phi(n)$ and all prime factors of $\phi(n)$, says $P=\{p_1,...,p_m\}$\\
