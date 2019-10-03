@@ -21,8 +21,16 @@
 \item Anti SG (the person who has no strategy wins) :\\
   first player wins iff either\\
   1. SG value of ALL subgame $\le$ $1$ and SG value of the game $=$ $0$\\
-  2. SG value of some subgame $>$ $1$ and SG value of the game $\neq$ $0$\\
+  2. SG value of some subgame $>$ $1$ and SG value of the game $\neq$ $0$
 \item Möbius inversion formula :\\
   $g(n) = \sum\limits_{d|n}f(d)$ for every integer $n\ge 1$ , then\\
-  $f(n) = \sum\limits_{d|n}\mu(d)g(\frac{n}{d})$ for every integer $n\ge 1$
+  $f(n) = \sum\limits_{d|n}\mu(d)g(\frac{n}{d}) = \sum\limits_{d|n}\mu(\frac{n}{d})g(d)$ for every integer $n\ge 1$\\
+  $\sum\limits_{d|n}\mu(d)=\epsilon(n)=[n=1]$ , 
+  $\sum\limits_{d|n}\phi(d)=n\Leftrightarrow \phi(n)=\sum\limits_{d|n}\mu(d)(\frac{n}{d})$
+\item Find a Primitive Root of $n$:\\
+  $n$ has primitive roots iff $n=2,4,p^k,2p^k$ where $p$ is an odd prime.\\
+  1. Find $\phi(n)$ and all prime factors of $\phi(n)$, says $P=\{p_1,...,p_m\}$\\
+  2. $\forall g\in[2,n)$, if $g^{\frac{\phi(n)}{p_i}}\ne 1,\forall p_i\in P$, then $g$ is a primitive root.\\
+  3. Since the smallest one isn't too big, the algorithm runs fast.\\
+  4. $n$ has exactly $\phi(\phi(n))$ primitive roots.
 \end{itemize}

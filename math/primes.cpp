@@ -5,7 +5,7 @@
 * 1010102101, 1000000000039, 1000000000000037
 * 2305843009213693951, 4611686018427387847
 * 9223372036854775783, 18446744073709551557 */
-int mu[ N ] , p_tbl[ N ];
+int mu[ N ] , p_tbl[ N ]; // multiplicative function f
 vector<int> primes;
 void sieve() {
   mu[ 1 ] = p_tbl[ 1 ] = 1;
@@ -13,24 +13,24 @@ void sieve() {
     if( !p_tbl[ i ] ){
       p_tbl[ i ] = i;
       primes.push_back( i );
-      mu[ i ] = -1;
+      mu[ i ] = -1; // f(i)=... where i is prime
     }
     for( int p : primes ){
       int x = i * p;
-      if( x >= M ) break;
+      if( x >= N ) break;
       p_tbl[ x ] = p;
       mu[ x ] = -mu[ i ];
-      if( i % p == 0 ){
+      if( i % p == 0 ){ // f(x)=f(i)/f(p^(k-1))*f(p^k)
         mu[ x ] = 0;
         break;
-      }
+      } // else f(x)=f(i)*f(p)
     }
   }
 }
 vector<int> factor( int x ){
   vector<int> fac{ 1 };
   while( x > 1 ){
-    int fn = SZ(fac), p = p_tbl[ x ], pos = 0;
+    int fn = fac.size(), p = p_tbl[ x ], pos = 0;
     while( x % p == 0 ){
       x /= p;
       for( int i = 0 ; i < fn ; i ++ )
