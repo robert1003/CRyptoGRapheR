@@ -11,6 +11,7 @@ const int MXM = 1000010;
 struct SAM{
   int tot, root, lst, mom[MXM], mx[MXM]; //ind[MXM]
   int nxt[MXM][33]; //cnt[MXM],ds[MXM],dsl[MXM],fp[MXM]
+  // bool v[MXM]
   int newNode(){
     int res = ++tot;
     fill(nxt[res], nxt[res]+33, 0);
@@ -70,12 +71,13 @@ struct SAM{
     calc(root);
     iota(ind,ind+tot,1);
     sort(ind,ind+tot,[&](int i,int j){return mx[i]<mx[j];});
-    for(int i=tot-1;i>=0;i--) cnt[mom[ind[i]]]+=cnt[ind[i]];
+    for(int i=tot-1;i>=0;i--)
+		cnt[mom[ind[i]]]+=cnt[ind[i]];
   }
   void calc(int x){
-    ds[x]=1; dsl[x]=0; rmom[mom[x]].push_back(x);
+    v[x]=ds[x]=1;dsl[x]=0; //rmom[mom[x]].push_back(x);
     for(int i=1;i<=26;i++){
-      if(nxt[x][i]){
+      if(nxt[x][i]&&!v[nxt[x][i]]){
         calc(nxt[x][i]);
         ds[x]+=ds[nxt[x][i]];
         dsl[x]+=ds[nxt[x][i]]+dsl[nxt[x][i]];

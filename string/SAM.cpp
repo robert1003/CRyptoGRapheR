@@ -51,10 +51,11 @@ struct SAM{
     calc(root);
     iota(ind,ind+tot,1);
     sort(ind,ind+tot,[&](int i,int j){return mx[i]<mx[j];});
-    for(int i=tot-1;i>=0;i--) cnt[mom[ind[i]]]+=cnt[ind[i]];
+    for(int i=tot-1;i>=0;i--)
+		cnt[mom[ind[i]]]+=cnt[ind[i]];
   }
   void calc(int x){
-    ds[x]=1; dsl[x]=0; v[x]=1; //rmom[mom[x]].push_back(x);
+    v[x]=ds[x]=1;dsl[x]=0; //rmom[mom[x]].push_back(x);
     for(int i=1;i<=26;i++){
       if(nxt[x][i]&&!v[nxt[x][i]]){
         calc(nxt[x][i]);
