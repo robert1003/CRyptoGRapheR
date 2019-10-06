@@ -1,7 +1,7 @@
 void calcH(int &t, int &h, const int p) {
 	int tmp=p-1; for(t=0;(tmp&1)==0;tmp/=2) t++; h=tmp;
 }
-// solve equation x^2 mod p = a
+// solve equation x^2 mod p = a where p is a prime
 bool solve(int a, int p, int &x, int &y) {
 	if(p == 2) { x = y = 1; return true; }
 	int p2 = p / 2, tmp = mypow(a, p2, p);
