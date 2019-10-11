@@ -15,7 +15,7 @@ struct SAM{
   int newNode(){
     int res = ++tot;
     fill(nxt[res], nxt[res]+33, 0);
-    mom[res] = mx[res] = 0; //cnt=ds=dsl=fp=0
+    mom[res] = mx[res] = 0; //cnt=ds=dsl=fp=v=0
     return res;
   }
   void init(){
