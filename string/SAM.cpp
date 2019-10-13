@@ -57,8 +57,8 @@ struct SAM{
   void calc(int x){
     v[x]=ds[x]=1;dsl[x]=0; //rmom[mom[x]].push_back(x);
     for(int i=1;i<=26;i++){
-      if(nxt[x][i]&&!v[nxt[x][i]]){
-        calc(nxt[x][i]);
+      if(nxt[x][i]){
+        if(!v[nxt[x][i]]) calc(nxt[x][i]);
         ds[x]+=ds[nxt[x][i]];
         dsl[x]+=ds[nxt[x][i]]+dsl[nxt[x][i]];
       }
