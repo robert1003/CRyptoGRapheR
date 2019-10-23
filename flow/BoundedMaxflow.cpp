@@ -1,8 +1,8 @@
 // Max flow with lower/upper bound on edges
-// source = 1 , sink = n
+// use with ISAP
 int in[ N ] , out[ N ];
 int l[ M ] , r[ M ] , a[ M ] , b[ M ];
-int solve(){
+int solve(int n, int m, int s, int t){
   flow.init( n );
   for( int i = 0 ; i < m ; i ++ ){
     in[ r[ i ] ] += a[ i ];
@@ -11,7 +11,7 @@ int solve(){
     // flow from l[i] to r[i] must in [a[ i ], b[ i ]]
   }
   int nd = 0;
-  for( int i = 1 ; i <= n ; i ++ ){
+  for( int i = 0 ; i <= n ; i ++ ){
     if( in[ i ] < out[ i ] ){
       flow.addEdge( i , flow.t , out[ i ] - in[ i ] );
       nd += out[ i ] - in[ i ];
@@ -20,25 +20,25 @@ int solve(){
       flow.addEdge( flow.s , i , in[ i ] - out[ i ] );
   }
   // original sink to source
-  flow.addEdge( n , 1 , INF );
-  if( flow.maxflow() != nd )
+  flow.addEdge( t , s , INF );
+  if( flow.solve() != nd )
     // no solution
     return -1;
-  int ans = flow.G[ 1 ].back().c; // source to sink
-  flow.G[ 1 ].back().c = flow.G[ n ].back().c = 0;
+  int ans = flow.G[ s ].back().c; // source to sink
+  flow.G[ s ].back().c = flow.G[ t ].back().c = 0;
   // take out super source and super sink
   for( size_t i = 0 ; i < flow.G[ flow.s ].size() ; i ++ ){
     flow.G[ flow.s ][ i ].c = 0;
-    Edge &e = flow.G[ flow.s ][ i ];
+    Maxflow::Edge &e = flow.G[ flow.s ][ i ];
     flow.G[ e.v ][ e.r ].c = 0;
   }
   for( size_t i = 0 ; i < flow.G[ flow.t ].size() ; i ++ ){
     flow.G[ flow.t ][ i ].c = 0;
-    Edge &e = flow.G[ flow.t ][ i ];
+    Maxflow::Edge &e = flow.G[ flow.t ][ i ];
     flow.G[ e.v ][ e.r ].c = 0;
   }
-  flow.addEdge( flow.s , 1 , INF );
-  flow.addEdge( n , flow.t , INF );
-  flow.reset();
-  return ans + flow.maxflow();
+  flow.addEdge( flow.s , s , INF );
+  flow.addEdge( t , flow.t , INF );
+  flow.reset(); // set iter,d,gap to 0
+  return ans + flow.solve();
 }
