@@ -13,9 +13,8 @@ typedef int Tcost;
   };
   int V, s, t;
   vector<Edge> g[MAXV];
-  void init(int n){
-    V = n+2;
-    s = n+1, t = n+2;
+  void init(int n, int _s, int _t){
+    V = n; s = _s; t = _t;
     for(int i = 0; i <= V; i++) g[i].clear();
   }
   void addEdge(int a, int b, int cap, Tcost w){
@@ -29,7 +28,7 @@ typedef int Tcost;
   Tcost solve(){
     int mxf = 0; Tcost mnc = 0;
     while(1){
-      fill(d, d+1+V, INFc);
+      fill(d, d+1+V, INFc); // need to use type cast
       fill(inqu, inqu+1+V, 0);
       fill(mom, mom+1+V, -1);
       mom[s] = s;
