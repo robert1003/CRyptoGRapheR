@@ -39,3 +39,8 @@ Maximum closed subgraph
 2. connect sink with negitive weighted vertex(capacity=-weight)
 3. make capacity of the original edges = inf
 4. ans = sum(positive weighted vertex's weight) - max flow
+
+Minimum Path Cover of DAG
+1. For each vertex v, split it to v_in and v_out.
+2. For each edge (u->v), add an edge between u_out and v_in
+3. |Minimum Path Cover| = |Maximum Matching| of the new bipartite graph
