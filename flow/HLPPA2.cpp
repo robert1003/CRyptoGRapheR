@@ -11,7 +11,7 @@ struct HLPP {
   int ptr[MAXN];
   T ef[MAXN];
   int h[MAXN], cnt[MAXN], work, hst=0/*highest*/;
-  void init(int _s, int _t) {
+  void init(int _n, int _s, int _t) {
   	n=_n+1; s = _s; t = _t;
     for(int i=0;i<n;i++) adj[i].clear();
   }
