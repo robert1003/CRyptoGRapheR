@@ -8,7 +8,11 @@
  * or convolution:
  * x = (x0, x0+x1), inv = (x0, x1-x0) w/o final div
  * and convolution:
- * x = (x0+x1, x1), inv = (x0-x1, x1) w/o final div */
+ * x = (x0+x1, x1), inv = (x0-x1, x1) w/o final div
+ * ternery xor convolution:
+ * x = (x0+x1+x2,x0+x1w+x2w^2,x0+x1w^2+x2w)
+ * inv = (1/3) * (x0+x1+x2,x0+x1w^2+x2w,x0+x1w+x2w^2)
+ * where w^3=1 and w^2=-w-1 */
 typedef long long LL;
 const int MAXN = (1<<20)+10;
 const LL MOD = 1e9+7;
