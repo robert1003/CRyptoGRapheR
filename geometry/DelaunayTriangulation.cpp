@@ -8,9 +8,7 @@ add_point : add a point into triangulation
 
 A Triangle is in triangulation iff. its has_chd is 0.
 Region of triangle u: iterate each u.edge[i].tri,
-each points are u.p[(i+1)%3], u.p[(i+2)%3]
-
-calculation involves O(|V|^6) */
+each points are u.p[(i+1)%3], u.p[(i+2)%3] */
 const int N = 100000 + 5;
 const type inf = 2e3;
 type eps = 1e-6; // 0 when integer
@@ -135,7 +133,7 @@ void go( TriRef now ){
     go( now->chd[ i ] );
 }
 void build( int n , Pt* ps ){
-  tris = pool;
+  tris = pool; triang.clear(); vst.clear();
   random_shuffle(ps, ps + n);
   Trig tri;
   for(int i = 0; i < n; ++ i)
