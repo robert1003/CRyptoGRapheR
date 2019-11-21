@@ -4,7 +4,7 @@ struct HLPP {
   struct Edge {
     int to, rev; T f;
   };
-  int s = MAXN-1, t = MAXN-2;
+  int n, s, t;
   vector<Edge> adj[MAXN];
   deque<int> lst[MAXN];
   vector<int> gap[MAXN];
@@ -12,24 +12,24 @@ struct HLPP {
   T excess[MAXN];
   int h[MAXN], cnt[MAXN], work, hst/*highest*/;
   void init(int _s, int _t) {
-      for(auto &x : adj) x.clear();
-      s = _s, t = _t;
+  	n=_n+1; s = _s; t = _t;
+    for(int i=0;i<n;i++) adj[i].clear();
   }
-  void addEdge(int from,int to,T f,bool isDir = true){
-    adj[from].push_back({to, (int)adj[to].size(), f});
-    adj[to].push_back({from, (int)adj[from].size()-1, isDir ? 0 : f});
+  void addEdge(int u,int v,T f,bool isDir = true){
+    adj[u].push_back({v,adj[v].size(),f});
+    adj[v].push_back({u,adj[u].size()-1,isDir?0:f});
   }
   void updHeight(int v, int nh) {
     work++;
-    if(h[v] != MAXN) cnt[h[v]]--;
+    if(h[v] != n) cnt[h[v]]--;
     h[v] = nh;
-    if(nh == MAXN) return;
+    if(nh == n) return;
     cnt[nh]++, hst = nh; gap[nh].push_back(v);
     if(excess[v]>0) lst[nh].push_back(v), ptr[nh]++;
   }
   void globalRelabel() {
     work = 0;
-    fill(begin(h), end(h), MAXN);
+    fill(begin(h), end(h), n);
     fill(begin(cnt), end(cnt), 0);
     for(int i=0; i<=hst; i++)
         lst[i].clear(), gap[i].clear(), ptr[i] = 0;
@@ -37,7 +37,7 @@ struct HLPP {
     while(!q.empty()) {
       int v = q.front(); q.pop();
       for(auto &e : adj[v])
-        if(h[e.to] == MAXN && adj[e.to][e.rev].f > 0)
+        if(h[e.to] == n && adj[e.to][e.rev].f > 0)
           q.push(e.to), updHeight(e.to, h[v] + 1);
       hst = h[v];
     }
@@ -50,7 +50,7 @@ struct HLPP {
     excess[v] -= df, excess[e.to] += df;
   }
   void discharge(int v) {
-    int nh = MAXN;
+    int nh = n;
     for(auto &e : adj[v]) {
       if(e.f > 0) {
         if(h[v] == h[e.to] + 1) {
@@ -62,13 +62,13 @@ struct HLPP {
     }
     if(cnt[h[v]] > 1) updHeight(v, nh);
     else {
-      for(int i = h[v]; i < MAXN; i++) {
-        for(auto j : gap[i]) updHeight(j, MAXN);
+      for(int i = h[v]; i < n; i++) {
+        for(auto j : gap[i]) updHeight(j, n);
         gap[i].clear(), ptr[i] = 0;
       }
     }
   }
-  T solve(int heur_n = MAXN) {
+  T solve(int heur_n = n) {
     fill(begin(excess), end(excess), 0);
     excess[s] = INF, excess[t] = -INF;
     globalRelabel();
