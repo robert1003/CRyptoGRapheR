@@ -49,10 +49,10 @@ void minball(int n){ ball();
       if(i>0){ Pt Tt = pt[i];
         memmove(&pt[1], &pt[0], sizeof(Pt)*i); pt[0]=Tt;
 }}}
-void solve{
+double solve{
   // n points in pt
   random_shuffle(pt, pt+n); radius=-1;
   for(int i=0;i<n;i++) if(norm2(res,pt[i])-radius>eps)
     nouter=1, outer[0]=pt[i], minball(i);
-  printf("%.5f\n",sqrt(radius));
+  return sqrt(radius);
 }
