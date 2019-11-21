@@ -2,8 +2,7 @@ template <int MAXN, class T = int>
 struct HLPP {
   const T INF = numeric_limits<T>::max();
   struct Edge {
-    int to, rev;
-    T f;
+    int to, rev; T f;
   };
   int s = MAXN-1, t = MAXN-2;
   vector<Edge> adj[MAXN];
@@ -16,9 +15,9 @@ struct HLPP {
       for(auto &x : adj) x.clear();
       s = _s, t = _t;
   }
-  void addEdge(int from, int to, T f, bool isDirected = true) {
+  void addEdge(int from,int to,T f,bool isDir = true){
     adj[from].push_back({to, (int)adj[to].size(), f});
-    adj[to].push_back({from, (int)adj[from].size()-1, isDirected ? 0 : f});
+    adj[to].push_back({from, (int)adj[from].size()-1, isDir ? 0 : f});
   }
   void updHeight(int v, int nh) {
     work++;
