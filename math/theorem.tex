@@ -11,9 +11,15 @@
   $S(n,k) = \frac{1}{k!} \sum\limits_{j=0}^k (-1)^{k-j} {k \choose j} j^n$
 \item Pick’s Theorem : $A = i + b/2 - 1$
 \item Kirchhoff's theorem :\\
+  -- number of spanning tree of undirected graph:\\
   degree matrix $D_{ii} = deg(i)$ , $D_{ij} = 0$\\
   adjacency matrix $G_{ij} = \#\;of\;(i,j) \in E$ , $G_{ii} = 0$,\\
-  let $A = D - G$, delete any one row, one column, and cal $det(A')$
+  let $A = D - G$, delete any one row, one column, and cal $det(A')$\\
+  -- number of spanning tree of directed graph:\\
+  in-degree matrix $D_{ii}^{in} = indeg(i)$ , $D_{ij}^{in} = 0$\\
+  out-degree matrix $D_{ii}^{out} = outdeg(i)$ , $D_{ij}^{out} = 0$\\
+  let $L^{in} = D^{in} - G$ , $L^{out} = D^{out} - G$ , delete the $i$-th row and column\\
+  $det(L_i^{in})$ and $det(L_i^{out})$ is the number of spanning tree from/to root $i$\\
 \item Burnside Lemma:
   $|X/G|=\frac{1}{|G|}\sum\limits_{g \in G} {|X^g|}$
 \item Polya theorem:
@@ -38,4 +44,18 @@
   2. $\forall g\in[2,n)$, if $g^{\frac{\phi(n)}{p_i}}\ne 1,\forall p_i\in P$, then $g$ is a primitive root.\\
   3. Since the smallest one isn't too big, the algorithm runs fast.\\
   4. $n$ has exactly $\phi(\phi(n))$ primitive roots.
+\item Sum of Two Squares Thm (Legendre):\\
+  For a given positive integer $N$, let\\
+  $D1 = (\#$ of $d \in N$ dividing $N$ that $d=1$ (mod 4))\\
+  $D3 = (\#$ of $d \in N$ dividing $N$ that $d=3$ (mod 4))\\
+  then $N$ can be written as a sum of two squares in\\
+  exactly $R(N) = 4(D1-D3)$ ways.
+\item Difference of $D1-D3$ Thm:\\
+  let $N=2^t \times [p_1^{e_1} \times ...\times p_r^{e_r}] \times [q_1^{f_1} \times ...\times q_s^{f_s}]$\\
+  where $p_i \in mod\;4 = 1\;prime$ , $q_i \in mod\;4 = 3\;prime$\\
+  then $D1 - D3 = \begin{cases}(e1+1)(e2+1)...(er+1)\;\;\;if\;f_i\;all\;even\\0\;\;\;if\;any\;f_i\;is\;odd\end{cases}$
+\item Sherman-Morrison formula:\\
+  suppose $A \in \mathbb{R}^{n\times n}$ is invertible and $u,v \in \mathbb{R}^n$\\
+  $A + uv^T$ is invertible if and only if $1 + v^TA^{-1}u \ne 0$\\
+  $(A + uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$\\
 \end{itemize}

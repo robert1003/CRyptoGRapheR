@@ -72,8 +72,4 @@ struct CircleCover{
           if (theta < 0) theta += 2. * pi;
           Area[cnt] +=
             (theta - sin(theta)) * c[i].R*c[i].R * .5;
-        }
-      }
-    }
-  }
-};
+} } } } };
