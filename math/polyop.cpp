@@ -83,4 +83,32 @@ struct PolyOp {
     Mul(n, b, n, c, tmp);
     copy(tmp, tmp+n, b);
   }
+  bool Sqrt(int n, LL a[], LL b[]){
+  	// Square root of a : b * b = a ( mod x^(n+1) )
+  	static LL c[MAXN];
+  	int ind=0,x,y,p=1;
+  	while(a[ind]==0) ind++;
+  	for(int i=0;i<n;i++)
+  		a[i]=a[i+ind];
+  	if((ind&1)||!solve(a[0],mod,x,y)) // discrete sqrt
+  		return 0;
+  	b[0]=min(x,y);
+  	while(p<n) p<<=1;
+  	for(int t=2;t<=p;t<<=1){
+  		Inv(t,b,c);
+  		Mul(t,a,t,c,c);
+  		for(int i=0;i<t;i++)
+  			b[i]=(b[i]+c[i])*inv(2)%mod;
+		}
+  	if(ind){
+  		for(int i=p-1;i>=ind/2;i--)
+  			b[i]=b[i-ind/2];
+  		for(int i=0;i<ind/2;i++)
+  			b[i]=0;
+  		for(int i=p-1;i>=ind;i--)
+  			a[i]=a[i-ind];
+  		for(int i=0;i<ind;i++)
+  			a[i]=0;
+		}
+	}
 } polyop;
