@@ -26,7 +26,7 @@ struct NTT{
 		for(int i=0;i<=MAXK;i++)
 			inv_omega[i]=inv(omega[i],P);
 	}
-	void tran(int n,LL a[],bool inv_ntt=false){//n=2^k
+	void tran(int n,LL a[],bool inv_ntt=false){//n=2^i
 		for(int i=1,j=0;i<n;i++){
 			for(int k=n>>1;!((j^=k)&k);k>>=1);
 			if(i<j) swap(a[i],a[j]);
@@ -51,5 +51,5 @@ struct NTT{
 	}
 };
 const LL P=2013265921,root=31;
-const int MAXN=4194304,MAXK=22;
+const int MAXN=4194304,MAXK=22;//MAXN=2^i
 NTT<P,root,MAXK,MAXN> ntt;
