@@ -41,7 +41,8 @@ struct MMC{
       }
       if (avg < mmc) tie(mmc, st) = tie(avg, i);
     }
-    FZ(vst); edgeID.clear(); cycle.clear(); rho.clear();
+    if(st==-1) return inf;
+    FZ(vst);edgeID.clear();cycle.clear();rho.clear();
     for (int i=n; !vst[st]; st=prv[i--][st]) {
       vst[st]++;
       edgeID.PB(prve[i][st]);

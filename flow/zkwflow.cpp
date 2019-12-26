@@ -7,13 +7,13 @@ struct zkwflow{
 	bool vis[N]; ll dist[N];
 	void init(int n,int s,int t){
 		nv=n+1; sv=s; tv=t;
-		for(int i=0;i<n;i++) g[n].clear();
+		for(int i=0;i<nv;i++) g[i].clear();
 	}
 	void add_edge(int a, int b, int c, ll w) {
 		g[a].push_back(Edge{b,int(g[b].size()),c,w});
 		g[b].push_back(Edge{a,int(g[a].size())-1,0,-w});
 	}
-	bool augment() {
+	bool augment() { // SPFA
 		for (int i = 0; i < nv; i++) {
 			dist[i] = LLINF; vis[i] = false;
 		}
