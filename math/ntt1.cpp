@@ -16,7 +16,7 @@ struct NTT{
 	}
 	static ll inv(ll a,ll b){
 		if(a==1) return 1;
-		return (((__int128)(a-inv(b%a,a))*b+1)/a)%b;
+		return (((a-inv(b%a,a))*b+1)/a)%b; // overflow
 	}
 	ll omega[MAXK+1],inv_omega[MAXK+1];
 	NTT(){

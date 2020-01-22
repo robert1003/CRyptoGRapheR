@@ -20,8 +20,14 @@ only and without visiting sink. Then, a vertex is
 chosen iff. it is on the left side and without visited
 or on the right side and visited through dfs.
 
-Maximum density subgraph ( \sum{W_e}+ \sum{W_v} ) / |V|
+Minimum Weighted Bipartite Edge Cover:
+Construct new bipartite graph with n+m vertices on each side:
+for each vertex u, duplicate a vertex u' on the other side
+for each edge (u,v,w), add edges (u,v,w) and (v',u',w)
+for each vertex u, add edge (u,u',2w) where w is min edge connects to u
+then the answer is the minimum perfect matching of the new graph (KM)
 
+Maximum density subgraph ( \sum{W_e}+ \sum{W_v} ) / |V|
 Binary search on answer:
 For a fixed D, construct a Max flow model as follow:
 Let S be Sum of all weight( or inf)
