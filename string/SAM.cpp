@@ -56,7 +56,7 @@ struct SAM{
   }
   void calc(int x){
     v[x]=ds[x]=1;dsl[x]=0; //rmom[mom[x]].push_back(x);
-    for(int i=1;i<=26;i++){
+    for(int i=0;i<26;i++){
       if(nxt[x][i]){
         if(!v[nxt[x][i]]) calc(nxt[x][i]);
         ds[x]+=ds[nxt[x][i]];
@@ -66,6 +66,6 @@ struct SAM{
   }
   void push(char *str){
     for(int i = 0; str[i]; i++)
-      push(str[i]-'a'+1);
+      push(str[i]-'a');
   }
 } sam;
