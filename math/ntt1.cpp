@@ -51,5 +51,5 @@ struct NTT{
   }
 };
 const LL P=2013265921,root=31;
-const int MAXN=4194304,MAXK=22;//MAXN=2^i
+const int MAXN=4194304,MAXK=22; //MAXN=2^k
 NTT<P,root,MAXK,MAXN> ntt;

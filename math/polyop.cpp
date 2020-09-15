@@ -1,6 +1,6 @@
 struct PolyOp {
 #define FOR(i, c) for (int i = 0; i < (c); ++i)
-  NTT<P, root, MAXN> ntt;
+  NTT<P, root, MAXK, MAXN> ntt;
   static int nxt2k(int x) {
     int i = 1; for (; i < x; i <<= 1); return i;
   }
