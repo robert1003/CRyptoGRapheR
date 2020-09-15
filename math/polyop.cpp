@@ -9,9 +9,9 @@ struct PolyOp {
     int N = nxt2k(n+m);
     copy(a, a+n, aa); fill(aa+n, aa+N, 0);
     copy(b, b+m, bb); fill(bb+m, bb+N, 0);
-    ntt(N, aa); ntt(N, bb);
+    ntt.tran(N, aa); ntt.tran(N, bb);
     FOR(i, N) c[i] = aa[i] * bb[i] % P;
-    ntt(N, c, 1);
+    ntt.tran(N, c, 1);
   }
   void Inv(int n, LL a[], LL b[]) {
     // ab = aa^-1 = 1 mod x^(n/2)
@@ -26,13 +26,13 @@ struct PolyOp {
     copy(a, a+n, tmp);
     fill(tmp+n, tmp+N, 0);
     fill(b+n, b+N, 0);
-    ntt(N, tmp); ntt(N, b);
+    ntt.tran(N, tmp); ntt.tran(N, b);
     FOR(i, N) {
       LL t1 = (2 - b[i] * tmp[i]) % P;
       if (t1 < 0) t1 += P;
       b[i] = b[i] * t1 % P;
     }
-    ntt(N, b, 1);
+    ntt.tran(N, b, 1);
     fill(b+n, b+N, 0);
   }
   void Div(int n, LL a[], int m, LL b[], LL d[], LL r[]) {
@@ -53,7 +53,7 @@ struct PolyOp {
   void dx(int n, LL a[], LL b[]) { REP(i, 1, n-1) b[i-1] = i * a[i] % P; }
   void Sx(int n, LL a[], LL b[]) {
     b[0] = 0;
-    FOR(i, n) b[i+1] = a[i] * ntt.iv[i+1] % P;
+    FOR(i, n) b[i+1] = a[i] * ntt.inv(i+1,P) % P;
   }
   void Ln(int n, LL a[], LL b[]) {
     // Integral a' a^-1 dx
