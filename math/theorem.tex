@@ -5,10 +5,14 @@
   %= C(\frac{m}{M},n/M) * C(m\%M,n\%M) mod P
 	$= \Pi ( C(m_i,n_i) )$
 	where $m_i$ is the $i$-th digit of $m$ in base $P$.
-\item Stirling Numbers(permutation $|P|=n$ with $k$ cycles): \\
-  $S(n,k) = \text{coefficient of }x^k \text{ in } \Pi_{i=0}^{n-1} (x+i)$
-\item Stirling Numbers(Partition $n$ elements into $k$ non-empty set): \\
-  $S(n,k) = \frac{1}{k!} \sum\limits_{j=0}^k (-1)^{k-j} {k \choose j} j^n$
+\item 1st Stirling Numbers(permutation $|P|=n$ with $k$ cycles): \\
+  $S(n,k) = \text{coefficient of }x^k \text{ in } \Pi_{i=0}^{n-1} (x+i)$ \\
+  $S(n+1,k) = nS(n,k)+S(n,k-1)$
+\item 2nd Stirling Numbers(Partition $n$ elements into $k$ non-empty set): \\
+  $S(n,k) = \frac{1}{k!} \sum\limits_{j=0}^k (-1)^{k-j} {k \choose j} j^n$ \\
+  $S(n+1,k) = kS(n,k)+S(n,k-1)$
+\item Derangement: \\
+  $D(n)=(n-1)(D(n-1)+D(n-2))=nD(n-1)+(-1)^n$
 \item Pick’s Theorem : $A = i + b/2 - 1$
 \item Kirchhoff's theorem :\\
   -- number of spanning tree of undirected graph:\\
