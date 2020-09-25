@@ -23,9 +23,7 @@ ld PCIntersect(vector<Pt> v, Circle cir) {
       theta = PI - B - asin(sin(B)/r*a);
       s = 0.5*a*r*sin(theta) + (C-theta)/2*r*r;
     }
-    else {
-      s = 0.5*sin(C)*a*b;
-    }
+    else s = 0.5*sin(C)*a*b;
     ans += abs(s)*dcmp(v[i]^v[(i+1)%n]);
   }
   return abs(ans);

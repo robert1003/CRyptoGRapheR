@@ -7,12 +7,9 @@ struct Splay {
   { f = ch[0] = ch[1] = &nil; }
   bool isr()
   { return f->ch[0] != this && f->ch[1] != this; }
-  int dir()
-  { return f->ch[0] == this ? 0 : 1; }
+  int dir(){return f->ch[0] != this;}
   void setCh(Splay *c, int d){
-    ch[d] = c;
-    if (c != &nil) c->f = this;
-    pull();
+    ch[d] = c; if (c != &nil) c->f = this; pull();
   }
   void push(){
     if( !rev ) return;
@@ -29,12 +26,10 @@ struct Splay {
 }Splay::nil,Splay::mem[MEM],*Splay::pmem=Splay::mem;
 Splay *nil = &Splay::nil;
 void rotate(Splay *x){
-  Splay *p = x->f;
-  int d = x->dir();
+  Splay *p = x->f; int d = x->dir();
   if (!p->isr()) p->f->setCh(x, p->dir());
   else x->f = p->f;
-  p->setCh(x->ch[!d], d);
-  x->setCh(p, !d);
+  p->setCh(x->ch[!d], d); x->setCh(p, !d);
 }
 vector<Splay*> splayVec;
 void splay(Splay *x){
@@ -56,46 +51,35 @@ int id(Splay *x) { return x - Splay::mem + 1; }
 Splay* access(Splay *x){
   Splay *q = nil;
   for (;x!=nil;x=x->f){
-    splay(x);
-    x->setCh(q, 1);
-    q = x;
+    splay(x); x->setCh(q, 1); q = x;
   }
   return q;
 }
 void chroot(Splay *x){
-  access(x),splay(x);
-  x->rev ^= 1;
+  access(x); splay(x); x->rev ^= 1;
 }
 void link(Splay *x, Splay *y){
-  chroot(y);
-  y->f=x;
+  chroot(y); y->f=x;
 }
 void cut_p(Splay *y) {
-  access(y),splay(y);
-  y->ch[0] = y->ch[0]->f = nil;
+  access(y);splay(y); y->ch[0] = y->ch[0]->f = nil;
 }
 void cut(Splay *x, Splay *y){
-  chroot(x);
-  cut_p(y);
+  chroot(x); cut_p(y);
 }
 Splay* get_root(Splay *x) {
   x=access(x);
-  for(; x->ch[0] != nil; x = x->ch[0])
-    x->push();
-  splay(x);
-  return x;
+  for(; x->ch[0] != nil; x = x->ch[0]) x->push();
+  splay(x); return x;
 }
 bool conn(Splay *x, Splay *y) {
-  x = get_root(x),y = get_root(y);
-  return x == y;
+  return get_root(x) == get_root(y);
 }
 Splay* lca(Splay *x, Splay *y) {
-  access(x);
-  return access(y);
+  access(x); return access(y);
 }
 /* query(Splay *x,Splay *y){
-  setroot(y),x=access(x);
-  return x->size;
+  setroot(y),x=access(x); return x->size;
 }*/
 /* query(Splay *x,Splay *y){
   Splay *p=lca(x,y);

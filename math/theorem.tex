@@ -1,4 +1,5 @@
 \begin{itemize}
+\setlength\itemsep{0.2em}
 \item Lucas’ Theorem :\\
   For $n, m \in \mathbb{Z}^{*}$ and prime $P$,
   $C(m,n) \mod P$
@@ -11,6 +12,11 @@
 \item 2nd Stirling Numbers(Partition $n$ elements into $k$ non-empty set): \\
   $S(n,k) = \frac{1}{k!} \sum\limits_{j=0}^k (-1)^{k-j} {k \choose j} j^n$ \\
   $S(n+1,k) = kS(n,k)+S(n,k-1)$
+\item Calculate $f(x+n)$ where $f(x)=\sum\limits_{i=0}^{n-1}a_ix^i$: \\
+  $f(x+n)=\sum\limits_{i=0}^{n-1}a_i(x+n)^i=\sum\limits_{i=0}^{n-1}x^i\cdot\frac{1}{i!}\sum\limits_{j=i}^{n-1}\frac{a_j}{j!}\cdot\frac{n^{j-i}}{(j-i)!}$
+\item Calculate $c[i-j]+=a[i]\times b[j]$ for $a[n],b[m]$ \\
+  1. a=reverse(a); c=mul(a,b); c=reverse(c[:n]); \\
+  2. b=reverse(b); c=mul(a,b); c=rshift(c,m-1); 
 \item Derangement: \\
   $D(n)=(n-1)(D(n-1)+D(n-2))=nD(n-1)+(-1)^n$
 \item Pick’s Theorem : $A = i + b/2 - 1$

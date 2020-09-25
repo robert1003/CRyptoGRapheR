@@ -2,7 +2,7 @@
 CH should not contain identical points, the area should
 be > 0, min pair(x, y) should be listed first */
 double det( const Pt& p1 , const Pt& p2 )
-{ return p1.X * p2.Y - p1.Y * p2.X; }
+{ return p1.x * p2.y - p1.y * p2.x; }
 struct Conv{
   int n;
   vector<Pt> a;
@@ -19,7 +19,7 @@ struct Conv{
     return x < 0 ? -1 : x > 0; }
   pair<LL,int> get_tang(vector<Pt> &conv, Pt vec){
     int l = 0, r = (int)conv.size() - 2;
-    for( ; l + 1 < r; ){
+    while(l + 1 < r){
       int mid = (l + r) / 2;
       if(sign(det(conv[mid+1]-conv[mid],vec))>0)r=mid;
       else l = mid;
@@ -35,7 +35,7 @@ struct Conv{
     if(l == r) return;
     upd_tang(p, l % n, i0, i1);
     int sl=sign(det(a[l % n] - p, a[(l + 1) % n] - p));
-    for( ; l + 1 < r; ) {
+    while(l + 1 < r) {
       int mid = (l + r) / 2;
       int smid=sign(det(a[mid%n]-p, a[(mid+1)%n]-p));
       if (smid == sl) l = mid;
@@ -45,7 +45,7 @@ struct Conv{
   }
   int bi_search(Pt u, Pt v, int l, int r) {
     int sl = sign(det(v - u, a[l % n] - u));
-    for( ; l + 1 < r; ) {
+    while(l + 1 < r) {
       int mid = (l + r) / 2;
       int smid = sign(det(v - u, a[mid % n] - u));
       if (smid == sl) l = mid;
@@ -55,14 +55,14 @@ struct Conv{
   }
   // 1. whether a given point is inside the CH
   bool contain(Pt p) { 
-    if (p.X < lower[0].X || p.X > lower.back().X) return 0;
-    int id = lower_bound(lower.begin(), lower.end(), Pt(p.X, -INF)) - lower.begin();
-    if (lower[id].X == p.X) { 
-      if (lower[id].Y > p.Y) return 0;
+    if (p.x < lower[0].x || p.x > lower.back().x) return 0;
+    int id = lower_bound(lower.begin(), lower.end(), Pt(p.x, -INF)) - lower.begin();
+    if (lower[id].x == p.x) { 
+      if (lower[id].y > p.y) return 0;
     }else if(det(lower[id-1]-p,lower[id]-p)<0)return 0;
-    id = lower_bound(upper.begin(), upper.end(), Pt(p.X, INF), greater<Pt>()) - upper.begin();
-    if (upper[id].X == p.X) {
-      if (upper[id].Y < p.Y) return 0;
+    id = lower_bound(upper.begin(), upper.end(), Pt(p.x, INF), greater<Pt>()) - upper.begin();
+    if (upper[id].x == p.x) {
+      if (upper[id].y < p.y) return 0;
     }else if(det(upper[id-1]-p,upper[id]-p)<0)return 0;
     return 1;
   }

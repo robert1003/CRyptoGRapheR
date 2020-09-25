@@ -19,9 +19,7 @@ struct SAM{
     return res;
   }
   void init(){
-    tot = 0;
-    root = newNode();
-    lst = root;
+    tot = 0; root = newNode(); lst = root;
   }
   void push(int c){
     int p = lst;
@@ -38,9 +36,7 @@ struct SAM{
         mx[nq] = mx[p]+1;
         for(int i = 0; i < 33; i++)
           nxt[nq][i] = nxt[q][i];
-        mom[nq] = mom[q];
-        mom[q] = nq;
-        mom[np] = nq;
+        mom[nq] = mom[q]; mom[q] = nq; mom[np] = nq;
         for(; p && nxt[p][c] == q; p = mom[p])
           nxt[p][c] = nq;
       }
@@ -48,8 +44,7 @@ struct SAM{
     lst = np;
   }
   void calc(){
-    calc(root);
-    iota(ind,ind+tot,1);
+    calc(root); iota(ind,ind+tot,1);
     sort(ind,ind+tot,[&](int i,int j){return mx[i]<mx[j];});
     for(int i=tot-1;i>=0;i--)
 		cnt[mom[ind[i]]]+=cnt[ind[i]];

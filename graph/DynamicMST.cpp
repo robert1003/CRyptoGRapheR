@@ -1,17 +1,17 @@
 /* Dynamic MST O( Q lg^2 Q )
- (qx[i], qy[i])->chg weight of edge No.qx[i] to qy[i]
+ n nodes, m edges, Q query
+ (u[i], v[i], w[i])->edge
+ (qid[i], qw[i])->chg weight of edge No.qid[i] to qw[i]
  delete an edge: (i, \infty)
- add an edge: change from \infty to specific value
- */
+ add an edge: change from \infty to specific value */
 const int SZ=M+3*MXQ;
 int a[N],*tz;
-int find(int xx){
-	int root=xx; while(a[root]) root=a[root];
-	int next; while((next=a[xx])){a[xx]=root; xx=next; }
-	return root;
+int find(int x){
+    return x==a[x]?x:a[x]=find(a[x]);
 }
 bool cmp(int aa,int bb){ return tz[aa]<tz[bb]; }
-int kx[N],ky[N],kt, vd[N],id[M], app[M];
+int kx[N],ky[N],kt, vd[N],id[M], app[M], cur;
+long long answer[MXQ]; // answer after ith query
 bool extra[M];
 void solve(int *qx,int *qy,int Q,int n,int *x,int *y,int *z,int m1,long long ans){
 	if(Q==1){
@@ -23,7 +23,7 @@ void solve(int *qx,int *qy,int Q,int n,int *x,int *y,int *z,int m1,long long ans
 			ri=find(x[id[i]]); rj=find(y[id[i]]);
 			if(ri!=rj){ ans+=z[id[i]]; a[ri]=rj; }
 		}
-		printf("%lld\n",ans);
+        answer[cur++]=ans;
 		return;
 	}
 	int ri,rj;
@@ -71,12 +71,5 @@ void solve(int *qx,int *qy,int Q,int n,int *x,int *y,int *z,int m1,long long ans
 	solve(qx,qy,mid,n2,Nx,Ny,Nz,m2,ans);
 	solve(qx+mid,qy+mid,Q-mid,n2,Nx,Ny,Nz,m2,ans);
 }
-int x[SZ],y[SZ],z[SZ],qx[MXQ],qy[MXQ],n,m,Q;
-void init(){
-	scanf("%d%d",&n,&m);
-	for(int i=0;i<m;i++) scanf("%d%d%d",x+i,y+i,z+i);
-	scanf("%d",&Q);
-	for(int i=0;i<Q;i++){ scanf("%d%d",qx+i,qy+i); qx[i]--; }
-}
-void work(){ if(Q) solve(qx,qy,Q,n,x,y,z,m,0); }
-int main(){init(); work(); }
+int u[SZ],v[SZ],w[SZ],qid[MXQ],qw[MXQ],n,m,Q;
+void work(){if(Q) cur=0,solve(qid,qw,Q,n,u,v,w,m,0);}
