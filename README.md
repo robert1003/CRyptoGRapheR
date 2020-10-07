@@ -8,7 +8,7 @@
 
 | Contest | Date | Rank | Solved/Total | Penalty | A | B | C | D | E | F | G | H | I | J | K | L | M |
 | ------- | ---- | ---- | ------------ | ------- | - | - | - | - | - | - | - | - | - | - | - | - | - |
-| [TOPC 2020](https://topc2020.icpc.tw) | 2020/10/07 | 3 | 9/10 | A | B | C | D | E | . | G | H | I | J | | |
+| [TOPC 2020](https://topc2020.icpc.tw) | 2020/10/07 | 3 | 9/10 | 786 | A | B | C | D | E | . | G | H | I | J | | |
 
 ## Training
 
