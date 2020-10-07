@@ -1,3 +1,6 @@
-//stack resize
-asm( "mov %0,%%esp\n" ::"g"(mem+10000000) );
-//change esp to rsp if 64-bit system
+const int size = 256 << 20;
+register long rsp asm("rsp");
+char *p = (char*)malloc(size) + size, *bak = (char*)rsp;
+__asm__("movq %0, %%rsp\n"::"r"(p));
+// main
+__asm__("movq %0, %%rsp\n"::"r"(bak));
