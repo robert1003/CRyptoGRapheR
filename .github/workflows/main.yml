@@ -38,7 +38,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Add Codebook" codebook.pdf
+          git commit -m "Update codebook built by Github-Pages" codebook.pdf
             
       - name: Push changes
         uses: ad-m/github-push-action@master
