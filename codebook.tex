@@ -40,9 +40,19 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setmainfont{Consolas}				%主要字型
+\setmainfont [				%主要字型
+    Path = .fonts/ttf/,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic
+  ] {Consolas}
 
-\setmonofont{Monaco}				%主要字型
+\setmonofont [        
+    Path = .fonts/ttf/,
+    UprightFont = *-Regular,
+    BoldFont = *-Regular,
+    ItalicFont = *-Regular
+  ] {Monaco}
 %\setCJKmainfont{BabelStone Han}
 %\setCJKmainfont{Source Han Sans}
 %\setCJKmainfont{Consolas}			%中文字型
