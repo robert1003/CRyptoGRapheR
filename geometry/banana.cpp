@@ -1,5 +1,5 @@
 int ori( const Pt& o , const Pt& a , const Pt& b ){
-  LL ret = ( a - o ) ^ ( b - o );
+  ll ret = ( a - o ) ^ ( b - o );
   return (ret > 0) - (ret < 0);
 }
 // p1 == p2 || q1 == q2 need to be handled
