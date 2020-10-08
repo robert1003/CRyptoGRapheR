@@ -29,3 +29,20 @@ jobs:
           root_file: codebook.tex
           latexmk_use_xelatex: true
           latexmk_shell_escape: true
+
+      # Push codebook.pdf to repo
+      - uses: actions/checkout@master
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
+      - name: Commit files
+          run: |
+            git config --local user.email "b07902047@ntu.edu.tw"
+            git config --local user.name "robert1003"
+            git commit -m "Add Codebook" -a
+            
+      - name: Push changes
+        uses: robert1003/998244353@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
