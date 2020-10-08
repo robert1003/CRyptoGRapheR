@@ -1,3 +1,16 @@
 *.aux
 *.log
 *.toc
+*.swp
+*.out
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
