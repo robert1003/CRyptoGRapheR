@@ -12,7 +12,7 @@ while idx != -1:
     file_end_idx = s.find('}', file_start_idx)
     file_name = s[file_start_idx:file_end_idx]
     if os.path.isfile(file_name) and file_name.endswith('cpp'):
-        hashval = os.popen('./hash.sh {}'.format(file_name)).read().strip()
+        hashval = os.popen('./basic/hash.sh {}'.format(file_name)).read().strip()
         s = s[:start_idx] + s[start_idx:end_idx] + ' ' + hashval + s[end_idx:]
     idx = s.find(r'\subsection{', file_end_idx)
 
