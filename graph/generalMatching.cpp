@@ -6,7 +6,7 @@ struct Graph{
   void init( int _n ){
     stp = 0; e = 1; n = _n;
     for( int i = 1 ; i <= n ; i ++ )
-      lnk[i] = vis[i] = 0;
+      head[i] = lnk[i] = vis[i] = 0;
   }
   void add_edge(int u,int v){
     to[e]=v,bro[e]=head[u],head[u]=e++;
