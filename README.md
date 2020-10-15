@@ -17,4 +17,5 @@
 | Contest | Date | Rank | Solved/Total | Penalty | A | B | C | D | E | F | G | H | I | J | K | L | M |
 | ------- | ---- | ---- | ------------ | ------- | - | - | - | - | - | - | - | - | - | - | - | - | - |
 | [NEERC 2017](https://codeforces.com/gym/101630) | 2020/09/29 | 37 | 5/12 | 396 | A | B | C | D | E | **F** | **G** | . | **I** | **J** | **K** | **L** | |
-| [NEERC 2018](https://codeforces.com/contest/1089) | 2020/10/07 | 75 | 5/13 | 589 | A | . | . | . | E | F | G | . | . | . | . | L | . |
+| [NEERC 2018](https://codeforces.com/contest/1089) | 2020/10/07 | 75 | 5/13 | 589 | A | **B** | **C** | . | E | F | G | . | . | . | **K** | L | . |
+| [CERC 2017](https://codeforces.com/gym/101620) | 2020/10/13 | 16 | 5/12 | 923 | A | . | . | . | . | F | . | H | . | J | . | L | |
