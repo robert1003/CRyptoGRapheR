@@ -3,7 +3,7 @@
 * A : solved in contest
 * **A** : solved after contest
 * (A): solved in mind
-* ?: problem broken
+* ?: problem is broken
 * (.) : not solved 
 
 ## Contest
