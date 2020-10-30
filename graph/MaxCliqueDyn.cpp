@@ -44,8 +44,8 @@ struct MaxClique{ // Maximum Clique
 			c.pop_back(); q--;
 		}
 	}
-	int solve(bitset<N> mask){ // vertex mask
-		vector<int> r,c;
+	int solve(bitset<N> mask=bitset<N>(string(N,'1'))){ // vertex mask
+		vector<int> r,c; ans=q=0;
 		for(int i=0;i<n;i++) if(mask[i]) r.push_back(i);
 		for(int i=0;i<n;i++) d[i]=(a[i]&mask).count();
 		sort(r.begin(),r.end(),[&](int i,int j){return d[i]>d[j];});
