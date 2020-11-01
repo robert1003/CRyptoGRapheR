@@ -15,8 +15,8 @@ struct Mec{
     double c1=norm2( a ) * 0.5;
     double c2=norm2( b ) * 0.5;
     double d = a ^ b;
-    double x = p0.X + (c1 * b.Y - c2 * a.Y) / d;
-    double y = p0.Y + (a.X * c2 - b.X * c1) / d;
+    double x = p0.x + (c1 * b.y - c2 * a.y) / d;
+    double y = p0.y + (a.x * c2 - b.x * c1) / d;
     return Pt(x,y);
   }
   pair<Pt,double> solve(){
@@ -28,7 +28,7 @@ struct Mec{
       r2 = 0;
       for (int j=0; j<i; j++){
         if (norm2(cen-p[j]) <= r2) continue;
-        cen=Pt((p[i].X+p[j].X)/2,(p[i].Y+p[j].Y)/2);
+        cen=Pt((p[i].x+p[j].x)/2,(p[i].y+p[j].y)/2);
         r2 = norm2(cen-p[j]);
         for (int k=0; k<j; k++){
           if (norm2(cen-p[k]) <= r2) continue;
