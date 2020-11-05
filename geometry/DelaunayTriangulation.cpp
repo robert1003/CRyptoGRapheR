@@ -8,20 +8,24 @@ add_point : add a point into triangulation
 
 A Triangle is in triangulation iff. its has_chd is 0.
 Region of triangle u: iterate each u.edge[i].tri,
-each points are u.p[(i+1)%3], u.p[(i+2)%3] */
+each points are u.p[(i+1)%3], u.p[(i+2)%3] 
 
+Voronoi diagram: for each triangle in triangulation, 
+the bisector of all its edges will split the region.
+nearest point will belong to the triangle containing it
+*/
 const int N = 100000 + 5;
 const type inf = 2e3;
 type eps = 1e-6; // 0 when integer
 type sqr(type x) { return x*x; }
 // return p4 is in circumcircle of tri(p1,p2,p3)
 bool in_cc(const Pt& p1, const Pt& p2, const Pt& p3, const Pt& p4){
-  type u11 = p1.X - p4.X; type u12 = p1.Y - p4.Y;
-  type u21 = p2.X - p4.X; type u22 = p2.Y - p4.Y;
-  type u31 = p3.X - p4.X; type u32 = p3.Y - p4.Y;
-  type u13 = sqr(p1.X)-sqr(p4.X)+sqr(p1.Y)-sqr(p4.Y);
-  type u23 = sqr(p2.X)-sqr(p4.X)+sqr(p2.Y)-sqr(p4.Y);
-  type u33 = sqr(p3.X)-sqr(p4.X)+sqr(p3.Y)-sqr(p4.Y);
+  type u11 = p1.x - p4.x; type u12 = p1.y - p4.y;
+  type u21 = p2.x - p4.x; type u22 = p2.y - p4.y;
+  type u31 = p3.x - p4.x; type u32 = p3.y - p4.y;
+  type u13 = sqr(p1.x)-sqr(p4.x)+sqr(p1.y)-sqr(p4.y);
+  type u23 = sqr(p2.x)-sqr(p4.x)+sqr(p2.y)-sqr(p4.y);
+  type u33 = sqr(p3.x)-sqr(p4.x)+sqr(p3.y)-sqr(p4.y);
   type det = -u13*u22*u31 + u12*u23*u31 + u13*u21*u32
              -u11*u23*u32 - u12*u21*u33 + u11*u22*u33;
   return det > eps;
@@ -120,9 +124,9 @@ struct Trig { // Triangulation
     flip(trl,1); flip(trl,2);
   }
 };
-vector<TriRef> triang;
+vector<TriRef> triang; // vector of all triangle
 set<TriRef> vst;
-void go( TriRef now ){
+void go( TriRef now ){ // store all tri into triang
   if( vst.find( now ) != vst.end() )
     return;
   vst.insert( now );
@@ -133,10 +137,10 @@ void go( TriRef now ){
   for( int i = 0 ; i < now->num_chd() ; i ++ )
     go( now->chd[ i ] );
 }
-void build( int n , Pt* ps ){
+void build( int n , Pt* ps ){ // build triangulation
   tris = pool; triang.clear(); vst.clear();
   random_shuffle(ps, ps + n);
-  Trig tri;
+  Trig tri; // the triangulation structure
   for(int i = 0; i < n; ++ i)
     tri.add_point(ps[i]);
   go( tri.the_root );
