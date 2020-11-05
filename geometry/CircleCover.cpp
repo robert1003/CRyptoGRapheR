@@ -5,19 +5,6 @@ struct CircleCover{
   // Area[i] : area covered by at least i circles
   ld Area[N];
   void init(int _C){ C = _C; }
-  bool CCinter(Circle& a, Circle& b, Pt& p1, Pt& p2){
-    Pt o1 = a.o, o2 = b.o; ld r1 = a.r, r2 = b.r;
-    if(norm(o1 - o2) > r1 + r2) return 0;
-    if(norm(o1 - o2) < max(r1, r2) - min(r1, r2)) return 0;
-    ld d2 = (o1 - o2) * (o1 - o2);
-    ld d = sqrt(d2);
-    if(d > r1 + r2) return 0;
-    Pt u=(o1+o2)*0.5 + (o1-o2)*((r2*r2-r1*r1)/(2*d2));
-    ld A=sqrt((r1+r2+d)*(r1-r2+d)*(r1+r2-d)*(-r1+r2+d));
-    Pt v=Pt(o1.y-o2.y, -o1.x + o2.x) * A / (2*d2);
-    p1 = u + v; p2 = u - v;
-    return 1;
-  }
   struct Teve {
     Pt p; ld ang; int add;
     Teve() {}
@@ -51,12 +38,11 @@ struct CircleCover{
           cnt++;
       for(int j = 0; j < C; j++)
         if(i != j && g[i][j]){
-          Pt aa, bb;
-          CCinter(c[i], c[j], aa, bb);
-          ld A=atan2(aa.y - c[i].o.y, aa.x - c[i].o.x);
-          ld B=atan2(bb.y - c[i].o.y, bb.x - c[i].o.x);
-          eve[E++] = Teve(bb, B, 1);
-          eve[E++] = Teve(aa, A, -1);
+          vector<Pt> v=CCinter(c[i], c[j]);
+          ld A=atan2(v[0].y - c[i].o.y, v[0].x - c[i].o.x);
+          ld B=atan2(v[1].y - c[i].o.y, v[1].x - c[i].o.x);
+          eve[E++] = Teve(v[1], B, 1);
+          eve[E++] = Teve(v[0], A, -1);
           if(B > A) cnt++;
         }
       if(E == 0) Area[cnt] += pi * c[i].r * c[i].r;
