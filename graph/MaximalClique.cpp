@@ -1,4 +1,4 @@
-#define N 111
+#define N 80
 struct MaxClique{ // 0-base
   typedef bitset<N> Int;
   Int lnk[N] , v[N];
@@ -11,27 +11,21 @@ struct MaxClique{ // 0-base
   }
   void addEdge(int a , int b)
   { v[a][b] = v[b][a] = 1; }
-  int popcount(const Int& val)
-  { return val.count(); }
-  int lowbit(const Int& val)
-  { return val._Find_first(); }
-  int ans , stk[N];
-  int id[N] , di[N] , deg[N];
+  int ans , stk[N], id[N] , di[N] , deg[N];
   Int cans;
   void dfs(int elem_num, Int candi, Int ex){
     if(candi.none()&&ex.none()){
-      ans = elem_num; cans.reset();
+      cans.reset();
       for(int i = 0 ; i < elem_num ; i ++)
         cans[id[stk[i]]] = 1;
-       // cans is a maximal clique
+      ans = elem_num; // cans is a maximal clique
       return;
     }
-    int pivot = lowbit(candi|ex);
+    int pivot = (candi|ex)._Find_first();
     Int smaller_candi = candi & (~lnk[pivot]);
     while(smaller_candi.count()){
-      int nxt = lowbit(smaller_candi);
-      candi[nxt] = 0;
-      smaller_candi[nxt] = 0;
+      int nxt = smaller_candi._Find_first();
+      candi[nxt] = smaller_candi[nxt] = 0;
       ex[nxt] = 1;
       stk[elem_num] = nxt;
       dfs(elem_num+1,candi&lnk[nxt],ex&lnk[nxt]);
@@ -47,11 +41,8 @@ struct MaxClique{ // 0-base
     for(int i = 0 ; i < n ; i ++)
       for(int j = 0 ; j < n ; j ++)
         if(v[i][j]) lnk[di[i]][di[j]] = 1;
-    Int cand; cand.reset();
-    for(int i = 0 ; i < n ; i ++) cand[i] = 1;
-    ans = 1;
-    cans.reset(); cans[0] = 1;
-    dfs(0, cand, 0);
+    ans = 1; cans.reset(); cans[0] = 1;
+    dfs(0, Int(string(n,'1')), 0);
     return ans;
   }
 } solver;
