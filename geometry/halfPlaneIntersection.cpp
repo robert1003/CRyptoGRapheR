@@ -4,7 +4,7 @@ bool onleft(Line L, Pt p) {
 }
 // assume that Lines intersect
 vector<Pt> HPI(vector<Line>& L) {
-  sort(L.begin(), L.end());
+  sort(L.begin(), L.end()); // sort by angle
   int n = L.size(), fir, las;
   Pt *p = new Pt[n];
   Line *q = new Line[n];
