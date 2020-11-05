@@ -1,6 +1,6 @@
 // Usage: linearRec({0, 1}, {1, 1}, k) //k'th fib
 typedef vector<ll> Poly;
-ll linearRec(Poly& S, Poly& tr, ll k) {
+ll linearRec(Poly&& S, Poly&& tr, ll k) {
   int n=tr.size();
   auto combine=[&](Poly& a, Poly& b) {
     Poly res(n*2+1);
