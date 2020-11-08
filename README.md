@@ -11,6 +11,7 @@
 | Contest | Date | Rank | Solved/Total | Penalty | A | B | C | D | E | F | G | H | I | J | K | L | M |
 | ------- | ---- | ---- | ------------ | ------- | - | - | - | - | - | - | - | - | - | - | - | - | - |
 | [TOPC 2020](https://topc2020.icpc.tw) | 2020/10/07 | 3 | 9/10 | 786 | A | B | C | D | E | . | G | H | I | J | | |
+| [Taipei 2020](https://lys0829.github.io/ICPC2020-Scoreboard/) | 2020/11/08 | 2 | 10/13 | 1309 | A | B | C | . | E | F | G | H | I | . | K | . | M |
 
 ## Training
 
