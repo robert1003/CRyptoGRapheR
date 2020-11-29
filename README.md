@@ -25,3 +25,4 @@
 | [NEERC 2016](https://codeforces.com/gym/101190) | 2020/10/17 | 37 | 5/13 | 775 | A | . | . | . | E | F | . | H | . | J | . | . | . |
 | [Malaysia National 2019](https://codeforces.com/gym/102219) | 2020/10/27 | 1 | 10/11 | 495 | A | B | C | ? | E | F | G | H | I | J | K | | |
 | [BAPC 2017](https://codeforces.com/gym/101666) | 2020/11/03 | 3 | 10/13 | 1044 | A | . | C | D | E | F | . | H | I | . | K | L | M |
+| [PtzWinterCamp rng_58 Contest 2014](https://codeforces.com/gym/100958) | 2020/11/28 | 37 | 4/10 | 943 | A | . | C | D | . | F | . | . | . | . | | |
