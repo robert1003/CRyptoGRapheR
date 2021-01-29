@@ -4,6 +4,6 @@ ll solve(ll x1, ll m1, ll x2, ll m2) {
   m1 /= g; m2 /= g;
   pair<ll,ll> p = gcd(m1, m2);
   ll lcm = m1 * m2 * g;
-  ll res = p.first * (x2 - x1) %lcm * m1 + x1; // overflow
+  ll res = p.first * (x2 - x1) %lcm * m1 %lcm + x1; // overflow
   return (res % lcm + lcm) % lcm;
 }
