@@ -1,4 +1,4 @@
-// h(s)=\sum_{s^' \subseteq s} f(s^')g(s\\s')
+// h(s)=\sum_{s^{'} \subseteq s} f(s^{'})g(s\backslash s{'})
 vector<int> SubsetConv(int n, const vector<int> &f, const vector<int> &g) {
   const int m = 1 << n;
   vector<vector<int>> a(n + 1, vector<int>(m)), b(n + 1, vector<int>(m));
