@@ -15,7 +15,7 @@ struct HLPP {
   	n=_n+1; s = _s; t = _t;
     for(int i=0;i<n;i++) adj[i].clear();
   }
-  void addEdge(int u,int v,T f,bool isDir = true){
+  void add_edge(int u,int v,T f,bool isDir = true){
     adj[u].push_back({v,adj[v].size(),f});
     adj[v].push_back({u,adj[u].size()-1,isDir?0:f});
   }
@@ -68,7 +68,7 @@ struct HLPP {
       }
     }
   }
-  T solve() {
+  T flow() {
     fill(ef, ef+n, 0);
     ef[s] = INF, ef[t] = -INF;
     globalRelabel();

@@ -8,7 +8,7 @@ struct HLPPA{
 		n=_n; s=_s; t=_t;
 		fill(deg,deg+n,0); memset(res,0,sizeof(res));
 	}
-	inline void addEdge(int u,int v,int c){
+	inline void add_edge(int u,int v,int c){
 		adj[u][deg[u]++]=v; adj[v][deg[v]++]=u;
 		res[u][v]+=c;
 	}
@@ -70,7 +70,7 @@ struct HLPPA{
 			else apt[v]++;
 		}
 	}
-	inline int solve(){
+	inline int flow(){
 		preflow();
 		while(htodo>=0){
 			if(ovque[htodo].empty()){
