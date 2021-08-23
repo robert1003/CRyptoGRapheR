@@ -1,6 +1,6 @@
 #define SZ(c) ((int)(c).size())
 struct Maxflow {
-  static const int MAXV = 20010;
+  static const int MAXV = 50010;
   static const int INF  = 1000000;
   struct Edge {
     int v, c, r;
@@ -10,24 +10,23 @@ struct Maxflow {
   int s, t;
   vector<Edge> G[MAXV];
   int iter[MAXV], d[MAXV], gap[MAXV], tot;
-  void init(int x) {
-    tot = x+2;
-    s = x+1, t = x+2;
+  void init(int n, int _s, int _t) {
+    tot = n, s = _s, t = _t;
     for(int i = 0; i <= tot; i++) {
       G[i].clear();
       iter[i] = d[i] = gap[i] = 0;
     }
   }
-  void addEdge(int u, int v, int c) {
+  void add_edge(int u, int v, int c) {
     G[u].push_back(Edge(v, c, SZ(G[v]) ));
     G[v].push_back(Edge(u, 0, SZ(G[u]) - 1));
   }
-  int dfs(int p, int flow) {
+  int DFS(int p, int flow) {
     if(p == t) return flow;
     for(int &i = iter[p]; i < SZ(G[p]); i++) {
       Edge &e = G[p][i];
       if(e.c > 0 && d[p] == d[e.v]+1) {
-        int f = dfs(e.v, min(flow, e.c));
+        int f = DFS(e.v, min(flow, e.c));
         if(f) {
           e.c -= f;
           G[e.v][e.r].c += f;
@@ -43,10 +42,10 @@ struct Maxflow {
     }
     return 0;
   }
-  int solve() {
+  int flow() {
     int res = 0;
     gap[0] = tot;
-    for(res = 0; d[s] < tot; res += dfs(s, INF));
+    for(res = 0; d[s] < tot; res += DFS(s, INF));
     return res;
   }
 } flow;
