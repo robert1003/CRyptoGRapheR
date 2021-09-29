@@ -8,27 +8,27 @@
  * PP | (Q-1) -> P < sqrt(Q), solve lgQ rounds of discrete log
  * else -> find a s.t. s | (Pa - 1) -> ans = A^a
  */
-void gcd(LL a, LL b, LL &x, LL &y, LL &g){
+void gcd(ll a, ll b, ll &x, ll &y, ll &g){
   if (b == 0) {
     x = 1, y = 0, g = a;
     return;
   }
-  LL tx, ty;
+  ll tx, ty;
   gcd(b, a%b, tx, ty, g);
   x = ty;
   y = tx - ty * (a / b);
   return;
 }
-LL P, A, Q, g;
+ll P, A, Q, g;
 // x^P = A mod Q
 
 const int X = 1e5;
 
-LL base;
-LL ae[X], aXe[X], iaXe[X];
-unordered_map<LL, LL> ht;
+ll base;
+ll ae[X], aXe[X], iaXe[X];
+unordered_map<ll, ll> ht;
 
-void build(LL a) { // ord(a) = P < sqrt(Q)
+void build(ll a) { // ord(a) = P < sqrt(Q)
   base = a;
   ht.clear();
   ae[0] = 1;
@@ -37,27 +37,27 @@ void build(LL a) { // ord(a) = P < sqrt(Q)
   aXe[1] = pw(a, X, Q);
   iaXe[0] = 1;
   iaXe[1] = pw(aXe[1], Q-2, Q);
-  REP(i, 2, X-1) {
+  for(int i=2;i<=X-1;i++) {
     ae[i] = mul(ae[i-1], ae[1], Q);
     aXe[i] = mul(aXe[i-1], aXe[1], Q);
     iaXe[i] = mul(iaXe[i-1], iaXe[1], Q);
   }
-  FOR(i, X) ht[ae[i]] = i;
+  for(int i=0;i<X;i++) ht[ae[i]] = i;
 }
 
-LL dis_log(LL x) {
-  FOR(i, X) {
-    LL iaXi = iaXe[i];
-    LL rst = mul(x, iaXi, Q);
+ll dis_log(ll x) {
+  for(int i=0;i<X;i++) {
+    ll iaXi = iaXe[i];
+    ll rst = mul(x, iaXi, Q);
     if (ht.count(rst)) {
-      LL res = i*X + ht[rst];
+      ll res = i*X + ht[rst];
       return res;
     }
   }
 }
 
-LL main2() {
-  LL t = 0, s = Q-1;
+ll main2() {
+  ll t = 0, s = Q-1;
   while (s % P == 0) {
     ++t;
     s /= P;
@@ -66,12 +66,12 @@ LL main2() {
 
   if (t == 0) {
     // a^{P^-1 mod phi(Q)}
-    LL x, y, _;
+    ll x, y, _;
     gcd(P, Q-1, x, y, _);
     if (x < 0) {
       x = (x % (Q-1) + Q-1) % (Q-1);
     }
-    LL ans = pw(A, x, Q);
+    ll ans = pw(A, x, Q);
     if (pw(ans, P, Q) != A) while(1);
     return ans;
   }
@@ -83,29 +83,29 @@ LL main2() {
     if (pw(g, (Q-1) / P, Q) != 1)
       break;
   }
-  LL alpha = 0;
+  ll alpha = 0;
   {
-    LL y, _;
+    ll y, _;
     gcd(P, s, alpha, y, _);
     if (alpha < 0) alpha = (alpha % (Q-1) + Q-1) % (Q-1);
   }
 
   if (t == 1) {
-    LL ans = pw(A, alpha, Q);
+    ll ans = pw(A, alpha, Q);
     return ans;
   }
 
-  LL a = pw(g, (Q-1) / P, Q);
+  ll a = pw(g, (Q-1) / P, Q);
   build(a);
-  LL b = pw(A, add(mul(P%(Q-1), alpha, Q-1), Q-2, Q-1), Q);
-  LL c = pw(g, s, Q);
-  LL h = 1;
+  ll b = pw(A, add(mul(P%(Q-1), alpha, Q-1), Q-2, Q-1), Q);
+  ll c = pw(g, s, Q);
+  ll h = 1;
 
-  LL e = (Q-1) / s / P; // r^{t-1}
-  REP(i, 1, t-1) {
+  ll e = (Q-1) / s / P; // r^{t-1}
+  for(int i=1;i<=t-1;i++) {
     e /= P;
-    LL d = pw(b, e, Q);
-    LL j = 0;
+    ll d = pw(b, e, Q);
+    ll j = 0;
     if (d != 1) {
       j = -dis_log(d);
       if (j < 0) j = (j % (Q-1) + Q-1) % (Q-1);
@@ -115,7 +115,7 @@ LL main2() {
     c = pw(c, P, Q);
   }
 
-  LL ans = mul(pw(A, alpha, Q), h, Q);
+  ll ans = mul(pw(A, alpha, Q), h, Q);
 
   return ans;
 }

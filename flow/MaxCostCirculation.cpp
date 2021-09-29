@@ -8,17 +8,17 @@ struct MaxCostCirc {
   int ans;
   void init( int _n , int _m ) : n(_n), m(_m) {}
   void adde( int u , int v , int w , int c ) {
-    g[ u ].push_back( { v , w , c , SZ( g[ v ] ) } );
-    g[ v ].push_back( { u , -w , 0 , SZ( g[ u ] )-1 } );
+    g[ u ].push_back( { v , w , c , (int)g[ v ].size() } );
+    g[ v ].push_back( { u , -w , 0 , (int)g[ u ].size()-1 );
   }
   bool poscyc() {
     fill( dis , dis+n+1 , 0 );
     fill( prv , prv+n+1 , 0 );
     fill( vis , vis+n+1 , 0 );
     int tmp = -1;
-    FOR( t , n+1 ) {
-      REP( i , 1 , n ) {
-        FOR( j , SZ( g[ i ] ) ) {
+    for(int t=0;t<=n;t++) {
+      for(int i=1;i<=n;i++) {
+        for(int j=0;j<(int)g[i].size();j++) {
           Edge& e = g[ i ][ j ];
           if( e.c && dis[ e.v ] < dis[ i ]+e.w ) {
             dis[ e.v ] = dis[ i ]+e.w;

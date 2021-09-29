@@ -14,7 +14,7 @@ struct Graph {
   { edge[u][v] = edge[v][u] = w; }
   bool SPFA(int u){
     if (onstk[u]) return true;
-    stk.PB(u);
+    stk.push_back(u);
     onstk[u] = 1;
     for (int v=0; v<n; v++){
       if (u != v && match[u] != v && !onstk[v]){
@@ -22,7 +22,7 @@ struct Graph {
         if (dis[m] > dis[u] - edge[v][m] + edge[u][v]){
           dis[m] = dis[u] - edge[v][m] + edge[u][v];
           onstk[v] = 1;
-          stk.PB(v);
+          stk.push_back(v);
           if (SPFA(m)) return true;
           stk.pop_back();
           onstk[v] = 0;
@@ -47,7 +47,7 @@ struct Graph {
         stk.clear();
         if (!onstk[i] && SPFA(i)){
           found = 1;
-          while (SZ(stk)>=2){
+          while ((int)stk.size()>=2){
             int u = stk.back(); stk.pop_back();
             int v = stk.back(); stk.pop_back();
             match[u] = v;

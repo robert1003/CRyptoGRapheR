@@ -7,12 +7,12 @@ struct Scc{
       E[i].clear(), rE[i].clear();
   }
   void addEdge(int u, int v){
-    E[u].PB(v); rE[v].PB(u);
+    E[u].push_back(v); rE[v].push_back(u);
   }
   void DFS(int u){
     vst[u]=1;
     for (auto v : E[u]) if (!vst[v]) DFS(v);
-    vec.PB(u);
+    vec.push_back(u);
   }
   void rDFS(int u){
     vst[u] = 1; bln[u] = nScc;

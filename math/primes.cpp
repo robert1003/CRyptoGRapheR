@@ -34,7 +34,7 @@ vector<int> factor( int x ){
     while( x % p == 0 ){
       x /= p;
       for( int i = 0 ; i < fn ; i ++ )
-        fac.PB( fac[ pos ++ ] * p );
+        fac.push_back( fac[ pos ++ ] * p );
     }
   }
   return fac;

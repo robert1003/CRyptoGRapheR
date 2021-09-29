@@ -16,10 +16,10 @@ bool solve(int a, int p, int &x, int &y) {
 			pb = mypow(b, h, p);
 		} int s = mypow(a, h / 2, p);
 		for (int step = 2; step <= t; step++) {
-			int ss = (((LL)(s * s) % p) * a) % p;
+			int ss = (((ll)(s * s) % p) * a) % p;
 			for(int i=0;i<t-step;i++) ss=mul(ss,ss,p);
 			if (ss + 1 == p) s = (s * pb) % p;
-      pb = ((LL)pb * pb) % p;
-		} x = ((LL)s * a) % p; y = p - x;
+      pb = ((ll)pb * pb) % p;
+		} x = ((ll)s * a) % p; y = p - x;
 	} return true; 
 }

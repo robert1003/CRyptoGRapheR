@@ -7,7 +7,7 @@ struct BccVertex {
     for (int i=0; i<n; i++) E[i].clear();
   }
   void addEdge(int u, int v)
-  { E[u].PB(v); E[v].PB(u); }
+  { E[u].push_back(v); E[v].push_back(u); }
   void DFS(int u, int f) {
     dfn[u] = low[u] = step++;
     stk[top++] = u;
@@ -21,9 +21,9 @@ struct BccVertex {
           sccv[nScc].clear();
           do {
             z = stk[--top];
-            sccv[nScc].PB(z);
+            sccv[nScc].push_back(z);
           } while (z != v);
-          sccv[nScc++].PB(u);
+          sccv[nScc++].push_back(u);
         }
       }else
         low[u] = min(low[u],dfn[v]);
@@ -38,7 +38,7 @@ struct BccVertex {
         top = 0;
         DFS(i,i);
       }
-    REP(i,nScc) res.PB(sccv[i]);
+    for(int i=0;i<nScc;i++) res.push_back(sccv[i]);
     return res;
   }
 }graph;

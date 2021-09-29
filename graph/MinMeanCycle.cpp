@@ -45,16 +45,16 @@ struct MMC{
     FZ(vst);edgeID.clear();cycle.clear();rho.clear();
     for (int i=n; !vst[st]; st=prv[i--][st]) {
       vst[st]++;
-      edgeID.PB(prve[i][st]);
-      rho.PB(st);
+      edgeID.push_back(prve[i][st]);
+      rho.push_back(st);
     }
     while (vst[st] != 2) {
       int v = rho.back(); rho.pop_back();
-      cycle.PB(v);
+      cycle.push_back(v);
       vst[v]++;
     }
     reverse(ALL(edgeID));
-    edgeID.resize(SZ(cycle));
+    edgeID.resize((int)cycle.size());
     return mmc;
   }
 } mmc;
