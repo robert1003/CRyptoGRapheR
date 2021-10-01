@@ -4,7 +4,7 @@
 const int mod = 1000000007;
 int b[MAXK]; // bernoulli number
 int inv[MAXK+1]; // inverse
-int cm[MAXK+1][MAXK+1]; // combinactories
+int cm[MAXK+1][MAXK+1]; // combinatorics
 int co[MAXK][MAXK+2]; // coeeficient of x^j when p=i
 inline int getinv(int x) {
   int a=x,b=mod,a0=1,a1=0,b0=0,b1=1;
@@ -17,15 +17,12 @@ inline int getinv(int x) {
   return a0<0?a0+mod:a0;
 }
 inline void pre() {
-  /* combinational */
   for(int i=0;i<=MAXK;i++) {
     cm[i][0]=cm[i][i]=1;
     for(int j=1;j<i;j++)
       cm[i][j]=add(cm[i-1][j-1],cm[i-1][j]);
   }
-  /* inverse */
   for(int i=1;i<=MAXK;i++) inv[i]=getinv(i);
-  /* bernoulli */
   b[0]=1; b[1]=getinv(2); // with b[1] = 1/2
   for(int i=2;i<MAXK;i++) {
     if(i&1) { b[i]=0; continue; }

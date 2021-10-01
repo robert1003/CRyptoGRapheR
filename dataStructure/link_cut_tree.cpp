@@ -2,7 +2,7 @@ const int MEM = 100005;
 struct Splay {
   static Splay nil, mem[MEM], *pmem;
   Splay *ch[2], *f;
-  int val, rev, size;
+  int val, rev, size; // int sum,vir,tot;
   Splay (int _val=-1) : val(_val), rev(0), size(1)
   { f = ch[0] = ch[1] = &nil; }
   bool isr()
@@ -20,6 +20,8 @@ struct Splay {
   }
   void pull(){
     size = ch[0]->size + ch[1]->size + 1;
+    // sum={ch[0]->sum,ch[1]->sum,val};
+    // tot={sum,vir}
     if (ch[0] != &nil) ch[0]->f = this;
     if (ch[1] != &nil) ch[1]->f = this;
   }
@@ -51,7 +53,8 @@ int id(Splay *x) { return x - Splay::mem + 1; }
 Splay* access(Splay *x){
   Splay *q = nil;
   for (;x!=nil;x=x->f){
-    splay(x); x->setCh(q, 1); q = x;
+    splay(x); // x->vir+={x->ch[0]->tot}-{q->tot};
+    x->setCh(q, 1); q = x;
   }
   return q;
 }
@@ -59,7 +62,8 @@ void chroot(Splay *x){
   access(x); splay(x); x->rev ^= 1;
 }
 void link(Splay *x, Splay *y){
-  chroot(y); y->f=x;
+  chroot(y); access(x); splay(x); y->f=x; 
+  // x->vir+={y->tot};
 }
 void cut_p(Splay *y) {
   access(y);splay(y); y->ch[0] = y->ch[0]->f = nil;
@@ -79,9 +83,10 @@ Splay* lca(Splay *x, Splay *y) {
   access(x); return access(y);
 }
 /* query(Splay *x,Splay *y){
-  setroot(y),x=access(x); return x->size;
+  setroot(y),x=access(x); return x->size; // x->sum;
 }*/
 /* query(Splay *x,Splay *y){
-  Splay *p=lca(x,y);
-  return p->val+p->ch[1]->size+(x!=p?x->size:0);
+  Splay *p=lca(x,y); 
+  return 1+p->ch[1]->size+(x!=p?x->size:0);
+  // {p->val,p->ch[1]->sum,x!=p?x->sum:0};
 }*/

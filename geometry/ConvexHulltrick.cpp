@@ -5,19 +5,17 @@ double det( const Pt& p1 , const Pt& p2 )
 { return p1.x * p2.y - p1.y * p2.x; }
 struct Conv{
   int n;
-  vector<Pt> a;
-  vector<Pt> upper, lower;
+  vector<Pt> a, upper, lower;
   Conv(vector<Pt> _a) : a(_a){
-    n = a.size();
-    int ptr = 0;
+    n = a.size(); int ptr = 0;
     for(int i=1; i<n; ++i) if (a[ptr] < a[i]) ptr = i;
     for(int i=0; i<=ptr; ++i) lower.push_back(a[i]);
     for(int i=ptr; i<n; ++i) upper.push_back(a[i]);
     upper.push_back(a[0]);
   }
-  int sign( LL x ){ // fixed when changed to double
+  int sign( ll x ){ // fixed when changed to double
     return x < 0 ? -1 : x > 0; }
-  pair<LL,int> get_tang(vector<Pt> &conv, Pt vec){
+  pair<ll,int> get_tang(vector<Pt> &conv, Pt vec){
     int l = 0, r = (int)conv.size() - 2;
     while(l + 1 < r){
       int mid = (l + r) / 2;
@@ -83,7 +81,7 @@ struct Conv{
   // 3. Find tangent points of a given vector
   // ret the idx of vertex has max cross value with vec
   int get_tang(Pt vec){ 
-    pair<LL, int> ret = get_tang(upper, vec);
+    pair<ll, int> ret = get_tang(upper, vec);
     ret.second = (ret.second+(int)lower.size()-1)%n;
     ret = max(ret, get_tang(lower, vec));
     return ret.second;

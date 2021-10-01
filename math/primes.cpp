@@ -5,9 +5,9 @@
 * 1010102101, 1000000000039, 1000000000000037
 * 2305843009213693951, 4611686018427387847
 * 9223372036854775783, 18446744073709551557 */
-int mu[ N ] , p_tbl[ N ]; // multiplicative function f
+int mu[ N ] , p_tbl[ N ]; // mobius, min prime factor
 vector<int> primes;
-void sieve() {
+void sieve() { // calculate multiplicative function f
   mu[ 1 ] = p_tbl[ 1 ] = 1;
   for( int i = 2 ; i < N ; i ++ ){
     if( !p_tbl[ i ] ){
@@ -23,7 +23,7 @@ void sieve() {
       if( i % p == 0 ){ // f(x)=f(i)/f(p^(k-1))*f(p^k)
         mu[ x ] = 0;
         break;
-      } // else f(x)=f(i)*f(p)
+      } // else f(x)=f(i)*f(p) where gcd(i,p)=1
     }
   }
 }

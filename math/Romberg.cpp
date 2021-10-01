@@ -1,7 +1,6 @@
-// Estimates the definite integral of
-// \int_a^b f(x) dx
+// Estimates the definite integral of \int_a^b f(x) dx
 template<class T>
-double romberg( T& f, double a, double b, double eps=1e-8){
+double romberg(T& f,double a,double b,double eps=1e-8){
 	vector<double>t; double h=b-a,last,curr; int k=1,i=1;
 	t.push_back(h*(f(a)+f(b))/2);
 	do{ last=t.back(); curr=0; double x=a+h/2;

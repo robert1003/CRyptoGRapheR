@@ -36,16 +36,13 @@ struct Maxflow {
     }
     if( (--gap[d[p]]) == 0) d[s] = tot;
     else {
-      d[p]++;
-      iter[p] = 0;
-      ++gap[d[p]];
+      d[p]++; iter[p] = 0; ++gap[d[p]];
     }
     return 0;
   }
   int flow() {
     int res = 0;
-    gap[0] = tot;
-    for(res = 0; d[s] < tot; res += DFS(s, INF));
+    for(res=0,gap[0]=tot;d[s]<tot;res+=DFS(s,INF));
     return res;
   }
 } flow;

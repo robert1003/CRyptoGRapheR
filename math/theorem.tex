@@ -75,4 +75,18 @@
   suppose $A \in \mathbb{R}^{n\times n}$ is invertible and $u,v \in \mathbb{R}^n$\\
   $A + uv^T$ is invertible if and only if $1 + v^TA^{-1}u \ne 0$\\
   $(A + uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$\\
+\item Pohlig-Hellman algorithm (discrete log):\\
+  Given an order $n$ group, generator $g$, element $h$, find $x$ s.t. $g^x=h$.\\
+  If $n=p^e$:\\
+    * let $x_0=0$, $\gamma=g^{p^{e-1}}$ where $\gamma$ has order $p$.\\
+    * for $k=0\sim e-1$:\\
+    1. let $h_k=(g^{-x_k}h)^{p^{e-1-k}}$ whose order divide $p\implies h_k\in \langle\gamma\rangle$.\\
+    2. find $d_k$ s.t. $\gamma^{d_k}=h_k$ with baby-step giant-step in $O(\sqrt p)$.\\
+    3. set $x_{k+1}=x_k+p^kd_k$\\
+    * return $x_e$ in total time complexity $O(e\sqrt p)$\\
+  If $n=\Pi_{i=1}^{r}p_i^{e_i}$:\\
+    * for each $i=1\sim r$:\\
+    1. let $g_i=g^{n/p_i^{e_i}}$ having order $p_i^{e_i}$, $h_i=h^{n/p_i^{e_i}}$ where $h_i\in\langle g_i\rangle$.\\
+    2. find $x_i$ s.t. $g_i^{x_i}=h_i$ using above algorithm.\\
+    * return $x=CRT(\{x_i\mod p_i^{e_i}\})$
 \end{itemize}

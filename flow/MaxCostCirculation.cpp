@@ -8,8 +8,8 @@ struct MaxCostCirc {
   int ans;
   void init( int _n , int _m ) : n(_n), m(_m) {}
   void adde( int u , int v , int w , int c ) {
-    g[ u ].push_back( { v , w , c , (int)g[ v ].size() } );
-    g[ v ].push_back( { u , -w , 0 , (int)g[ u ].size()-1 );
+    g[u].push_back({v,w,c,(int)g[v].size()});
+    g[v].push_back({u,-w,0,(int)g[u].size()-1);
   }
   bool poscyc() {
     fill( dis , dis+n+1 , 0 );
@@ -22,8 +22,7 @@ struct MaxCostCirc {
           Edge& e = g[ i ][ j ];
           if( e.c && dis[ e.v ] < dis[ i ]+e.w ) {
             dis[ e.v ] = dis[ i ]+e.w;
-            prv[ e.v ] = i;
-            prve[ e.v ] = j;
+            prv[ e.v ] = i; prve[ e.v ] = j;
             if( t == n ) {
               tmp = i;
               break;
@@ -45,8 +44,7 @@ struct MaxCostCirc {
     do{
       Edge &e = g[ prv[ now ] ][ prve[ now ] ];
       Edge &re = g[ now ][ e.r ];
-      e.c -= df;
-      re.c += df;
+      e.c -= df; re.c += df;
       now = prv[ now ];
     }while( now != cur );
     return 1;

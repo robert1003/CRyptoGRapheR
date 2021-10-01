@@ -42,8 +42,7 @@ struct Dinic{
     return res;
   }
   int flow(int res=0){
-    while ( BFS() )
-      res += DFS(s,2147483647);
+    while ( BFS() ) res += DFS(s,2147483647);
     return res;
   }
 }flow;

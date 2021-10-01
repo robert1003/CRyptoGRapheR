@@ -1,16 +1,13 @@
 template <int MAXN, class T = int>
 struct HLPP {
   const T INF = numeric_limits<T>::max();
-  struct Edge {
-    int to, rev; T f;
-  };
+  struct Edge { int to, rev; T f; };
   int n, s, t;
   vector<Edge> adj[MAXN];
   deque<int> lst[MAXN];
   vector<int> gap[MAXN];
-  int ptr[MAXN];
   T ef[MAXN];
-  int h[MAXN], cnt[MAXN], work, hst=0; // highest
+  int ptr[MAXN],h[MAXN],cnt[MAXN],work,hst=0; // highest
   void init(int _n, int _s, int _t) {
   	n=_n+1; s = _s; t = _t;
     for(int i=0;i<n;i++) adj[i].clear();
@@ -28,9 +25,7 @@ struct HLPP {
     if(ef[v]>0) lst[nh].push_back(v), ptr[nh]++;
   }
   void globalRelabel() {
-    work = 0;
-    fill(h, h+n, n);
-    fill(cnt, cnt+n, 0);
+    work = 0; fill(h, h+n, n); fill(cnt, cnt+n, 0);
     for(int i=0; i<=hst; i++)
         lst[i].clear(), gap[i].clear(), ptr[i] = 0;
     queue<int> q({t}); h[t] = 0;
@@ -69,8 +64,7 @@ struct HLPP {
     }
   }
   T flow() {
-    fill(ef, ef+n, 0);
-    ef[s] = INF, ef[t] = -INF;
+    fill(ef, ef+n, 0); ef[s] = INF, ef[t] = -INF;
     globalRelabel();
     for(auto &e : adj[s]) push(s, e);
     for(; hst >= 0; hst--) {

@@ -65,7 +65,7 @@ struct PolyOp {
     fill(b+n, b+N, 0);
   }
   void Exp(int n, ll a[], ll b[]) {
-    // Newton method to solve g(a(x)) = ln b(x) - a(x) = 0
+    // Newton method to solve g(a(x))=ln(b(x))-a(x)=0
     // b' = b - g(b(x)) / g'(b(x))
     // b' = b (1 - lnb + a)
     static ll lnb[MAXN], c[MAXN], tmp[MAXN];
