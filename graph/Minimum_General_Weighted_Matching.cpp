@@ -36,8 +36,7 @@ struct Graph {
   int solve() {
     // find a match
     for (int i=0; i<n; i+=2){
-      match[i] = i+1;
-      match[i+1] = i;
+      match[i] = i+1; match[i+1] = i;
     }
     while (true){
       int found = 0;
@@ -50,8 +49,7 @@ struct Graph {
           while ((int)stk.size()>=2){
             int u = stk.back(); stk.pop_back();
             int v = stk.back(); stk.pop_back();
-            match[u] = v;
-            match[v] = u;
+            match[u] = v; match[v] = u;
           }
         }
       }
@@ -60,7 +58,6 @@ struct Graph {
     int ret = 0;
     for (int i=0; i<n; i++)
       ret += edge[i][match[i]];
-    ret /= 2;
-    return ret;
+    return ret/2;
   }
 }graph;

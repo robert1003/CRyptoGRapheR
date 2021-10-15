@@ -5,7 +5,7 @@ bool onseg(Pt p, Line L) {
 // assume a.s != a.e != b.s != b.e
 Pt SSIntersect(Line a, Line b) {
   Pt p = LLIntersect(a, b);
-  if(isinf(p.x) && (onseg(a.s,b) || onseg(a.e,b) || onseg(b.s, a) || onseg(b.e, a))) return p; // overlap
-  if(isfinite(p.x) && onseg(p, a) && onseg(p, b)) return p; // non-parallel
+  if(isinf(p.x)&&(onseg(a.s,b)||onseg(a.e,b)||onseg(b.s,a)||onseg(b.e,a))) return p; // overlap
+  if(isfinite(p.x)&&onseg(p,a)&&onseg(p,b)) return p;
   return {NAN,NAN}; // non-intersect
 }
