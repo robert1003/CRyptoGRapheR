@@ -5,4 +5,5 @@ so $VIMRUNTIME/mswin.vim
 colo desert
 filet plugin indent on
 no <F5> :!./a.out<CR>
-no <F9> :!g++ -O2 -std=gnu++14 -lm % -g -fsanitize=undefined -Wall -Wextra -Wshadow -Wno-unused-result<CR>
+no <F9> :!g++ -O2 -std=c++17 % -g -fsanitize=undefined -Wall -Wextra -Wshadow -Wno-unused-result<CR>
+se undofile undodir=~/.vim/undodir " mkdir manually
