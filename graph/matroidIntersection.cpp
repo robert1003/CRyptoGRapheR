@@ -1,7 +1,7 @@
 /* Matroid Definition:
  * 1. Empty set is ind. 2. Subset of ind. set is ind.
  * 3. If set A, B are ind. and |A| < |B|,
- *    there exists x in B s.t. B U {x} is ind.
+ *    there exists x in B\A s.t. A U {x} is ind.
  * Max Weighted Matroid Intersection:
  * Let vertex weight l(x) = w(x) if x in left part else -w(x)
  * Find shortest aug. path with SPFA, first based on l(x), then
