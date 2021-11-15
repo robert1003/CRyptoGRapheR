@@ -1,8 +1,7 @@
 struct Dinic{
   static const int MXN = 10000;
   struct Edge{ int v,f,re; };
-  int n,s,t,level[MXN];
-  vector<Edge> E[MXN];
+  int n,s,t,level[MXN]; vector<Edge> E[MXN];
   void init(int _n, int _s, int _t){
     n = _n; s = _s; t = _t;
     for (int i=0; i<n; i++) E[i].clear();
@@ -13,18 +12,13 @@ struct Dinic{
   }
   bool BFS(){
     for (int i=0; i<n; i++) level[i] = -1;
-    queue<int> que;
-    que.push(s);
-    level[s] = 0;
+    queue<int> que; que.push(s); level[s] = 0;
     while (!que.empty()){
       int u = que.front(); que.pop();
       for (auto &it : E[u]){
         if (it.f > 0 && level[it.v] == -1){
-          level[it.v] = level[u]+1;
-          que.push(it.v);
-        }
-      }
-    }
+          level[it.v] = level[u]+1; que.push(it.v);
+    } } }
     return level[t] != -1;
   }
   int DFS(int u, int nf){

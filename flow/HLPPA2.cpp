@@ -2,11 +2,8 @@ template <int MAXN, class T = int>
 struct HLPP {
   const T INF = numeric_limits<T>::max();
   struct Edge { int to, rev; T f; };
-  int n, s, t;
-  vector<Edge> adj[MAXN];
-  deque<int> lst[MAXN];
-  vector<int> gap[MAXN];
-  T ef[MAXN];
+  int n, s, t; T ef[MAXN]; vector<Edge> adj[MAXN];
+  deque<int> lst[MAXN]; vector<int> gap[MAXN];
   int ptr[MAXN],h[MAXN],cnt[MAXN],work,hst=0; // highest
   void init(int _n, int _s, int _t) {
   	n=_n+1; s = _s; t = _t;
@@ -27,7 +24,7 @@ struct HLPP {
   void globalRelabel() {
     work = 0; fill(h, h+n, n); fill(cnt, cnt+n, 0);
     for(int i=0; i<=hst; i++)
-        lst[i].clear(), gap[i].clear(), ptr[i] = 0;
+      lst[i].clear(), gap[i].clear(), ptr[i] = 0;
     queue<int> q({t}); h[t] = 0;
     while(!q.empty()) {
       int v = q.front(); q.pop();
@@ -60,9 +57,7 @@ struct HLPP {
       for(int i = h[v]; i < n; i++) {
         for(auto j : gap[i]) updHeight(j, n);
         gap[i].clear(), ptr[i] = 0;
-      }
-    }
-  }
+  } } }
   T flow() {
     fill(ef, ef+n, 0); ef[s] = INF, ef[t] = -INF;
     globalRelabel();

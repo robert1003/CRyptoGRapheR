@@ -10,11 +10,11 @@ ll linearRec(Poly&& S, Poly&& tr, ll k) {
       res[i-1-j]=(res[i-1-j]+res[i]*tr[j])%mod;
     res.resize(n+1);
     return res;
-  }; // a * b mod (x^n-tr)
+  }; // combine: a * b mod (x^n-tr)
   Poly pol(n+1), e(pol);
   pol[0]=e[1]=1;
   for (++k;k;k/=2) {
-    if(k%2)pol=combine(pol,e);
+    if(k%2) pol=combine(pol,e);
     e=combine(e,e);
   }
   ll res=0;
