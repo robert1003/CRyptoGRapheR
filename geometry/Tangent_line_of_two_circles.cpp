@@ -3,8 +3,8 @@ vector<Line> go(const Circle& c1,const Circle& c2,int sign1){
   vector<Line> ret;
   double d_sq=norm2(c1.o-c2.o);
   if(d_sq<eps) return ret;
-  double d=sqrt(d_sq); Pt v=(c2.o-c1.o)/gd;
-  double c=(c1.r-sign1*c2.r)/gd;
+  double d=sqrt(d_sq); Pt v=(c2.o-c1.o)/d;
+  double c=(c1.r-sign1*c2.r)/d;
   if(c*c>1) return ret;
   double h=sqrt(max(0.0,1.0-c*c));
   for(int sign2=1;sign2>=-1;sign2-=2){

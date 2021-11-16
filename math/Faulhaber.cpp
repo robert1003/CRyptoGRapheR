@@ -33,14 +33,14 @@ inline void pre() {
   for(int i=1;i<MAXK;i++) {
     co[i][0]=0;
     for(int j=0;j<=i;j++)
-      co[i][i-j+1]=mul(inv[i+1], mul(cm[i+1][j], b[j]));
+      co[i][i-j+1]=mul(inv[i+1],mul(cm[i+1][j],b[j]));
   }
 }
 /* sample usage: return f(n,p) = sigma_x=1~n (x^p) */
 inline int solve(int n,int p) {
   int sol=0,m=n;
   for(int i=1;i<=p+1;i++) {
-    sol=add(sol,mul(co[p][i],m)); m = mul(m, n);
+    sol=add(sol,mul(co[p][i],m)); m=mul(m, n);
   }
   return sol;
 }

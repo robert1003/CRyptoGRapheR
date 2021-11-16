@@ -32,7 +32,7 @@ struct DominatorTree{
     dfs(s);
     REPD(i,n,2){
       int u=nfd[i];
-      if(u==0) continue ;
+      if(u==0) continue;
       for(int v:pred[u]) if(dfn[v]){
         eval(v);
         if(cmp(sdom[mn[v]],sdom[u]))sdom[u]=sdom[mn[v]];

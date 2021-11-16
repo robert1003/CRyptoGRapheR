@@ -3,8 +3,8 @@ Given a sets of points on 2D plane, find a
 triangulation such that no points will strictly
 inside circumcircle of any triangle.
 
-find:return a triangle contain given point
-add_point:add a point into triangulation
+find: return a triangle contain given point
+add_point: add a point into triangulation
 
 A Triangle is in triangulation iff. its has_chd is 0.
 Region of triangle u: iterate each u.edge[i].tri,
@@ -48,7 +48,7 @@ struct Tri {
   }
   bool contains(Pt const& q) const {
     for(int i=0;i<3;i++)
-      if(side(p[i], p[(i+1)%3], q)<-eps) return false;
+      if(side(p[i],p[(i+1)%3],q)<-eps) return false;
     return true;
   }
 } pool[N*10], *tris;
@@ -93,13 +93,13 @@ struct Trig { // Triangulation
     int pj=tri->edge[pi].side;
     if (!in_cc(tri->p[0],tri->p[1],tri->p[2],trj->p[pj])) return;
     /* flip edge between tri,trj */
-    TriRef trk=new(tris++) Tri(tri->p[(pi+1)%3], trj->p[pj], tri->p[pi]);
-    TriRef trl=new(tris++) Tri(trj->p[(pj+1)%3], tri->p[pi], trj->p[pj]);
-    edge(Edge(trk,0), Edge(trl,0));
-    edge(Edge(trk,1), tri->edge[(pi+2)%3]);
-    edge(Edge(trk,2), trj->edge[(pj+1)%3]);
-    edge(Edge(trl,1), trj->edge[(pj+2)%3]);
-    edge(Edge(trl,2), tri->edge[(pi+1)%3]);
+    TriRef trk=new(tris++) Tri(tri->p[(pi+1)%3],trj->p[pj],tri->p[pi]);
+    TriRef trl=new(tris++) Tri(trj->p[(pj+1)%3],tri->p[pi],trj->p[pj]);
+    edge(Edge(trk,0),Edge(trl,0));
+    edge(Edge(trk,1),tri->edge[(pi+2)%3]);
+    edge(Edge(trk,2),trj->edge[(pj+1)%3]);
+    edge(Edge(trl,1),trj->edge[(pj+2)%3]);
+    edge(Edge(trl,2),tri->edge[(pi+1)%3]);
     tri->chd[0]=trk; tri->chd[1]=trl; tri->chd[2]=0;
     trj->chd[0]=trk; trj->chd[1]=trl; trj->chd[2]=0;
     flip(trk,1); flip(trk,2); flip(trl,1); flip(trl,2);
@@ -115,9 +115,9 @@ void go(TriRef now){ // store all tri into triang
   }
   for(int i=0;i<now->num_chd();i++) go(now->chd[i]);
 }
-void build(int n , Pt* ps){ // build triangulation
+void build(int n,Pt* ps){ // build triangulation
   tris=pool; triang.clear(); vst.clear();
-  random_shuffle(ps, ps+n); tri.init();
-  for(int i=0; i<n;++i) tri.add_point(ps[i]);
+  random_shuffle(ps,ps+n); tri.init();
+  for(int i=0;i<n;++i) tri.add_point(ps[i]);
   go(tri.the_root);
 }

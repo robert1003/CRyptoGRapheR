@@ -61,7 +61,7 @@ struct Conv{
   }
   // 2. Find 2 tang pts on CH of a given outside point
   // return true with i0,i1 as index of tangent points
-  // return false ifinside CH
+  // return false if inside CH
   bool get_tang(Pt p,int &i0,int &i1){ 
     if(contain(p)) return false;
     i0=i1=0;
@@ -83,7 +83,7 @@ struct Conv{
   }
   // 4. Find intersection point of a given line
   // return 1 and intersection is on edge (i,next(i))
-  // return 0 ifno strictly intersection
+  // return 0 if no strictly intersection
   bool get_intersection(Pt u,Pt v,int &i0,int &i1){ 
    int p0=get_tang(u-v),p1=get_tang(v-u);
    if(sign(det(v-u,a[p0]-u))*sign(det(v-u,a[p1]-u))<0){

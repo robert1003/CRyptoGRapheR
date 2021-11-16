@@ -1,7 +1,7 @@
 struct KM{ // max weight,for min negate the weights
   static const int MXN=2001;// 1-based
   static const ll INF=0x3f3f3f3f;
-  int n,mx[MXN],my[MXN],pa[MXN];bool vx[MXN],vy[MXN];
+  int n,mx[MXN],my[MXN],pa[MXN]; bool vx[MXN],vy[MXN];
   ll g[MXN][MXN],lx[MXN],ly[MXN],sy[MXN];
   void init(int _n){
     n=_n; for(int i=1;i<=n;i++) fill(g[i],g[i]+n+1,0);
@@ -36,7 +36,7 @@ struct KM{ // max weight,for min negate the weights
       for(int y=1;y<=n;++y) if(!vy[y]&&sy[y]==0){
         if(!my[y]){ augment(y); return; }
         vy[y]=1,q.push(my[y]);
-  } } g
+  } } }
   ll solve(){
     fill(mx,mx+n+1,0);fill(my,my+n+1,0);
     fill(ly,ly+n+1,0);fill(lx,lx+n+1,-INF);

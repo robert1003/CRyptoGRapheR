@@ -1,6 +1,6 @@
 #define N 1021
 struct CircleCover{            // overlap
-  int C;Circle c[N]; bool g[N][N],over[N][N];
+  int C; Circle c[N]; bool g[N][N],over[N][N];
   // Area[i] : area covered by at least i circles
   ld Area[N];
   void init(int _C){ C=_C;}
@@ -21,7 +21,7 @@ struct CircleCover{            // overlap
     return (sign(c[i].r-c[j].r)>0||(sign(c[i].r-c[j].r)==0&&i<j))&&contain(c[i],c[j],-1);
   }
   void solve(){
-    for(int i=0;i <= C+1;i++) Area[i]=0;
+    for(int i=0;i<=C+1;i++) Area[i]=0;
     for(int i=0;i<C;i++) for(int j=0;j<C;j++)
         over[i][j]=contain(i,j);
     for(int i=0;i<C;i++) for(int j=0;j<C;j++) 

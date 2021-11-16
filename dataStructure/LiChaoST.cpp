@@ -2,7 +2,7 @@ struct LiChao_min{
   struct line{
     ll m,c;
     line(ll _m=0,ll _c=0) { m=_m; c=_c; }
-    ll eval(ll x) { return m*gx+c; }
+    ll eval(ll x) { return m*x+c; }
   };
   struct node{
     node *l,*r; line f;

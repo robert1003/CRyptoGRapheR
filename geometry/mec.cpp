@@ -6,7 +6,7 @@ struct Mec{ // return pair of center and r
   }
   double sqr(double a){ return a*a; }
   Pt center(Pt p0, Pt p1, Pt p2){
-    Pt a=p1-p0; Pt b=p2-p0;
+    Pt a=p1-p0,b=p2-p0;
     double c1=norm2(a)*0.5,c2=norm2(b)*0.5,d=a^b;
     double x=p0.x+(c1*b.y-c2*a.y)/d;
     double y=p0.y+(a.x*c2-b.x*c1)/d;

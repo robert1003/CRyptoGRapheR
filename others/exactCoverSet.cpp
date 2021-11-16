@@ -6,7 +6,7 @@ bool used[N]; // answer: the row used
 int id[N][M];
 int L[NM],R[NM],D[NM],U[NM],C[NM],S[NM],ROW[NM];
 void remove(int c){
-  L[R[c]]=L[c];R[L[c]]=R[c];
+  L[R[c]]=L[c]; R[L[c]]=R[c];
   for(int i=D[c];i!=c;i=D[i])
     for(int j=R[i];j!=i;j=R[j]){
       U[D[j]]=U[j]; D[U[j]]=D[j]; S[C[j]]--;

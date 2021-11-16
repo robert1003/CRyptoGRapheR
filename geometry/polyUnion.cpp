@@ -39,7 +39,7 @@ double polyUnion(int n){ //py[0~n-1] must be filled
             c[r++]=make_pair(tc/(tc-td),-1);
       } } }
       sort(c,c+r);
-      z=min(max(c[0].first,0.0),1.0);d=c[0].second;s=0;
+      z=min(max(c[0].first,0.0),1.0); d=c[0].second; s=0;
       for(j=1;j<r;j++){
         w=min(max(c[j].first,0.0),1.0);
         if(!d) s+=w-z;

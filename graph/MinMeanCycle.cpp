@@ -5,7 +5,7 @@ struct MMC{
   struct Edge{ int v,u; double c; };
   int n,m,prv[V][V],prve[V][V],vst[V]; Edge e[E];
   vector<int> edgeID,cycle,rho; double d[V][V];
-  void init(int _n){ n=_n;m=0; }
+  void init(int _n){ n=_n; m=0; }
   // WARNING: TYPE matters
   void addEdge(int vi,int ui,double ci)
   { e[m++]={vi,ui,ci}; }
@@ -45,4 +45,4 @@ struct MMC{
     edgeID.resize((int)cycle.size());
     return mmc;
   }
-} mmc;
+}mmc;
