@@ -17,7 +17,7 @@ struct MatroidIntersection {
   bool augment(){ // prepareInd1(), prepareInd2();
     for(auto &x:GS) x.p=-2; // init l,dis,len,inque
     int ep=-3;queue<int> q;
-    for(int i=0;i<n;++i) if(testInd1(i))
+    for(int i=0;i<n;++i) if(!GS[i].chosen&&testInd1(i))
       GS[i].p=-1,q.push(i);
     while(!q.empty()){ // bfs -> SPFA
       int cur=q.front(); q.pop();
