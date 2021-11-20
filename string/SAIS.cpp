@@ -10,7 +10,8 @@ struct SA{
     sais(_s,_sa,_p,_q,_t,_c,n,m); mkhei(n);
   }
   void mkhei(int n){
-    REP(i,n) r[_sa[i]]=i; hei[0]=0;
+    REP(i,n) r[_sa[i]]=i; 
+    hei[0]=0;
     REP(i,n) if(r[i]) {
       int ans=i>0?max(hei[r[i-1]]-1,0):0;
       while(_s[i+ans]==_s[_sa[r[i]-1]+ans]) ans++;

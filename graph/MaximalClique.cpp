@@ -37,4 +37,4 @@ struct MaxClique{ // 0-base
     dfs(0,Int(string(n,'1')),0);
     return ans;
   }
-} solver;
+}graph;

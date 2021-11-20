@@ -1,6 +1,6 @@
 // should shuffle vertices and edges
 const int N=100005,E=(2e5)*2+40;
-struct Graph{
+struct Graph{ // 1-based; match: i <-> lnk[i]
   int to[E],bro[E],head[N],e,lnk[N],vis[N],stp,n;
   void init(int _n){
     stp=0; e=1; n=_n;
