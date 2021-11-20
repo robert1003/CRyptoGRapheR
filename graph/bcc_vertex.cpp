@@ -3,7 +3,7 @@ struct BccVertex{
   vector<int> E[MXN],bccv[MXN];
   // vector<pair<int,int>> bcce[MXN];
   // pair<int,int> estk[MXM];// max edge number
-  // int id[MXN],pos[MXN];
+  // int etop,id[MXN],pos[MXN];
   void init(int _n){
     n=_n;nBcc=step=0; for(int i=0;i<n;i++) E[i].clear();
   }
@@ -36,7 +36,7 @@ struct BccVertex{
     vector<vector<int>> res;
     for(int i=0;i<n;i++) dfn[i]=low[i]=-1;
     for(int i=0;i<n;i++) if(dfn[i] == -1){
-        top=0; etop=0; DFS(i,i);
+        top=0; DFS(i,i); // etop=0; 
       }
     for(int i=0;i<nBcc;i++) res.push_back(bccv[i]);
     return res;
