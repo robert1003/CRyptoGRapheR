@@ -4,7 +4,7 @@
 // n < 2^64                       7 :
 // 2, 325, 9375, 28178, 450775, 9780504, 1795265022
 bool witness(ll a,ll n,ll u,int t){
-	if(!a) return 0;
+	if(!(a%=n)) return 0;
 	ll x=mypow(a,u,n);
 	for(int i=0;i<t;i++) {
 		ll nx=mul(x,x,n);
