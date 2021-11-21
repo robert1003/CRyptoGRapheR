@@ -76,7 +76,7 @@
   $A + uv^T$ is invertible if and only if $1 + v^TA^{-1}u \ne 0$\\
   $(A + uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$\\
 \item Pohlig-Hellman algorithm (discrete log):\\
-  Given an order $n$ group, generator $g$, element $h$, find $x$ s.t. $g^x=h$.\\
+  Given an \textbf{order} $n$ group, generator $g$, element $h$, find $x$ s.t. $g^x=h$.\\
   If $n=p^e$:\\
     * let $x_0=0$, $\gamma=g^{p^{e-1}}$ where $\gamma$ has order $p$.\\
     * for $k=0\sim e-1$:\\
