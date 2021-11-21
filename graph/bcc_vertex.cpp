@@ -12,8 +12,8 @@ struct BccVertex{
   void DFS(int u,int f){
     dfn[u]=low[u]=step++; stk[top++]=u;
     for(auto v:E[u]){
-      if(v == f) continue;
-      if(dfn[v] == -1){
+      if(v==f) continue;
+      if(dfn[v]==-1){
         // estk[etop++]={u,v};
         DFS(v,u); low[u]=min(low[u],low[v]);
         if(low[v]>=dfn[u]){
@@ -35,7 +35,7 @@ struct BccVertex{
   vector<vector<int>> solve(){
     vector<vector<int>> res;
     for(int i=0;i<n;i++) dfn[i]=low[i]=-1;
-    for(int i=0;i<n;i++) if(dfn[i] == -1){
+    for(int i=0;i<n;i++) if(dfn[i]==-1){
         top=0; DFS(i,i); // etop=0; 
       }
     for(int i=0;i<nBcc;i++) res.push_back(bccv[i]);
@@ -46,6 +46,6 @@ struct BccVertex{
     if(dfn[u]>dfn[v]) swap(u,v);
     int cid=id[v];
     if(id[u]==cid) return{cid,{pos[v],pos[u]}};
-    else return{cid,pos[v],{bccv[cid].size()-1}};
+    else return{cid,{pos[v],bccv[cid].size()-1}};
   } */
 }graph;
