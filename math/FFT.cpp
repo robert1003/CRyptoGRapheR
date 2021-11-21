@@ -8,7 +8,7 @@ void pre_fft(){
   for(int i=0;i<=MXN;i++)
     omega[i]=exp(i*2*PI/MXN*I);
 }
-// n must be 2^k; fft(clpx(a+b,a-b)); Re(ifft(c))/4+0.5;
+// n must be 2^k; fft(cplx(a+b,a-b)); Re(ifft(c))/4+0.5;
 void fft(int n,cplx a[],bool inv=false){
   int basic=MXN/n,theta=basic;
   for(int m=n;m>=2;m>>=1) {

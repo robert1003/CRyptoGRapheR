@@ -1,8 +1,8 @@
 const int MAXN=100010;
-struct DominatorTree{
+struct DominatorTree{ // 1-based
 #define REP(i,s,e) for(int i=(s);i<=(e);i++)
 #define REPD(i,s,e) for(int i=(s);i>=(e);i--)
-  int n,m,s; vector<int> g[MAXN],pred[MAXN],cov[MAXN];
+  int n,s; vector<int> g[MAXN],pred[MAXN],cov[MAXN];
   int dfn[MAXN],nfd[MAXN],ts,par[MAXN];
   int sdom[MAXN],idom[MAXN],mom[MAXN],mn[MAXN];
   inline bool cmp(int u,int v){ return dfn[u] <dfn[v]; }
@@ -13,8 +13,8 @@ struct DominatorTree{
       mn[u]=mn[mom[u]];
     return mom[u]=res;
   }
-  void init(int _n,int _m,int _s){
-    ts=0; n=_n; m=_m; s=_s;
+  void init(int _n,int _s){
+    ts=0; n=_n; s=_s;
     REP(i,1,n) g[i].clear(),pred[i].clear();
   }
   void addEdge(int u,int v){
@@ -23,9 +23,9 @@ struct DominatorTree{
   void dfs(int u){
     ts++; dfn[u]=ts; nfd[ts]=u;
     for(int v:g[u]) if(dfn[v]==0){ par[v]=u; dfs(v); }
-  }
-  void build(){
-    REP(i,1,n){
+  } // x dominates y <=> path s to y must go through x
+  void build(){ // <=> x is an ancestor of y in the tree
+    REP(i,1,n){ // result tree edges: idom[i] -> i
       dfn[i]=nfd[i]=0; cov[i].clear();
       mom[i]=mn[i]=sdom[i]=i;
     }
@@ -51,4 +51,4 @@ struct DominatorTree{
       if(idom[u]!=sdom[u]) idom[u]=idom[idom[u]];
     }
   }
-} domT;
+}domT;
