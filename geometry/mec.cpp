@@ -1,6 +1,6 @@
 struct Mec{ // return pair of center and r
   static const int N=101010;
-  int n; Pt p[ N ], cen; double r2;  
+  int n; Pt p[N], cen; double r2;  
   void init(int _n,Pt _p[]){
     n=_n; memcpy(p,_p,sizeof(Pt)*n);
   }
@@ -12,7 +12,7 @@ struct Mec{ // return pair of center and r
     double y=p0.y+(a.x*c2-b.x*c1)/d;
     return Pt(x,y);
   }
-  pair<Pt,double> solve(){
+  pair<Pt,double> solve(){ // expected O(n)
     random_shuffle(p,p+n); r2=0;
     for (int i=0; i<n; i++){
       if (norm2(cen-p[i])<=r2) continue;
