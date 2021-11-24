@@ -48,6 +48,11 @@
 \item Polya theorem:
   $|Y^x/G|=\frac{1}{|G|}\sum\limits_{g \in G} {m^{c(g)}}$\\
   $m = |Y|$ : num of colors, c(g) : num of cycle
+\item Prufer Sequence:\\
+  There is a bijection between the set of labeled trees with $n$ vertices and the set of sequences of length $n-2$ containing $1\sim n$.\\
+  Property: Each vertex $i$ exists $d_i-1$ times in the sequence.\\
+  Tree to sequence: iterate $n-2$ times to remove a leaf with smallest id and append its adjacent vertex's id to the end of the sequence.\\
+  Sequence to tree: iterate through $i=1\sim n-2$ and connect $a_i$ with the smallest id that doesn't exist in $a_{i+1},\dots,a_{n-2}$ and haven't been used yet. Also connect the remaining two unused vertices at last.
 \item Anti SG (the person who has no strategy wins) :\\
   first player wins iff either\\
   1. SG value of ALL subgame $\le$ $1$ and SG value of the game $=$ $0$\\
