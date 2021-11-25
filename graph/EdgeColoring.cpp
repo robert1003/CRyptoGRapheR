@@ -24,7 +24,7 @@ vi edgeColoring(int n,vector<pii> eds){ // 0-based
   for(int i=0;i<(int)eds.size();i++)
 		for(tie(u,v)=eds[i];adj[u][ret[i]]!=v;) ++ret[i];
 	return ret; // color (0~max_deg) of each edge (O(NM))
-} // max_deg coloring for bipartite graph: repeatly
+} // max_deg-coloring of bipartite graph: repeatly
 // find a matching containing all max_deg vertices,
 // color those edges with a color and remove them.
 // use bounded flow to force to use all max_deg vertices
