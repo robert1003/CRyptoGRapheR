@@ -14,7 +14,7 @@ struct Maxflow{
       G[i].clear(); iter[i]=d[i]=gap[i]=0;
     }
   }
-  void add_edge(int u,int v,int c){
+  void addEdge(int u,int v,int c){
     G[u].push_back(Edge(v,c,SZ(G[v])));
     G[v].push_back(Edge(u,0,SZ(G[u])-1));
   }
@@ -35,5 +35,5 @@ struct Maxflow{
     int res=0;
     for(res=0,gap[0]=tot;d[s]<tot;res+=DFS(s,INF));
     return res;
-  }
+  } // reset: set iter,d,gap to 0
 } flow;
