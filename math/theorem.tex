@@ -38,7 +38,7 @@
   let $L^{in} = D^{in} - G$ , $L^{out} = D^{out} - G$ , delete the $i$-th row and column\\
   $det(L_i^{in})$ and $det(L_i^{out})$ is the number of spanning tree from/to root $i$\\
 \item Tutte Matrix:\\
-  A graph $G=(V,E)$ has a perfect matching iff $det(A)\ne 0$ where\\
+  For a graph $G=(V,E)$, its maximum matching $=\frac{rank(A)}{2}$ where\\
   $A_{ij}=((i,j)\in E ? (i < j ? x_{ij} : -x_{ji}) : 0)$ and $x_{ij}$ are random numbers.
 \item Erdős–Gallai theorem:\\
   There exists a simple graph with degree sequence $d_1\ge\cdots\ge d_n$ iff\\
@@ -53,6 +53,9 @@
   Property: Each vertex $i$ exists $d_i-1$ times in the sequence.\\
   Tree to sequence: iterate $n-2$ times to remove a leaf with smallest id and append its adjacent vertex's id to the end of the sequence.\\
   Sequence to tree: iterate through $i=1\sim n-2$ and connect $a_i$ with the smallest id that doesn't exist in $a_{i+1},\dots,a_{n-2}$ and haven't been used yet. Also connect the remaining two unused vertices at last.
+\item Cayley's Formula:\\
+  Given a degree sequence $d_1,\dots,d_n$ of a labeled tree, there are $\frac{(n-2)!}{(d_1-1)!\cdots(d_n-1)!)}$ spanning trees.\\
+  Let $T_{n,k}=$ number of labeled forest of $n$ vertices and $k$ components such that vertices $1,\dots,k$ belong to different components, $T_{n,k}=kn^{n-k-1}$
 \item Anti SG (the person who has no strategy wins) :\\
   first player wins iff either\\
   1. SG value of ALL subgame $\le$ $1$ and SG value of the game $=$ $0$\\
