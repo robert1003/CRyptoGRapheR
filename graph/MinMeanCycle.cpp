@@ -1,5 +1,4 @@
-/* minimum mean cycle O(VE) */
-const int E=101010,V=1021;
+const int E=101010,V=1021; // minimum mean cycle O(VE)
 const double inf=1e9,eps=1e-8;
 struct MMC{
   struct Edge{ int v,u; double c; };

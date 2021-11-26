@@ -41,11 +41,10 @@ struct BccVertex{
     for(int i=0;i<nBcc;i++) res.push_back(bccv[i]);
     return res;
   }
-  /* bccv[.first][{.second.first,.second.second}]=={u,v}
   pair<int,pair<int,int>> getpos(int u,int v){
     if(dfn[u]>dfn[v]) swap(u,v);
     int cid=id[v];
     if(id[u]==cid) return{cid,{pos[v],pos[u]}};
     else return{cid,{pos[v],bccv[cid].size()-1}};
-  } */
+  }//bccv[.first][{.second.first,.second.second}]=={u,v}
 }graph;
