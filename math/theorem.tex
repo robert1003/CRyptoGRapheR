@@ -37,6 +37,8 @@
   out-degree matrix $D_{ii}^{out} = outdeg(i)$ , $D_{ij}^{out} = 0$\\
   let $L^{in} = D^{in} - G$ , $L^{out} = D^{out} - G$ , delete the $i$-th row and column\\
   $det(L_i^{in})$ and $det(L_i^{out})$ is the number of spanning tree from/to root $i$\\
+\item Hall's theorem:\\
+  Let $G=(X+Y,E)$ be a bipartite graph. For $W\subseteq X$, let $N(W)\subseteq Y$ denotes the adjacent vertices set of $W$. Then, $G$ has a $X'$-perfect matching (matching contains $X'\subseteq X$) iff $\forall W\subseteq X', |W|\le|N(W)|$.
 \item Tutte Matrix:\\
   For a graph $G=(V,E)$, its maximum matching $=\frac{rank(A)}{2}$ where\\
   $A_{ij}=((i,j)\in E ? (i < j ? x_{ij} : -x_{ji}) : 0)$ and $x_{ij}$ are random numbers.
