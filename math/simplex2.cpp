@@ -30,7 +30,7 @@ VDB simplex(int m,int n,vector<VDB> a){
     pivot(x,y);
   }
   for(int x,y;;){
-    for(int j=y=1;j<=n;++j) if(dcmp(a[0][j]-a[0][y])<0) y=j;
+    for(int j=y=1;j<=n;++j) if(dcmp(a[0][j]-a[0][y])>0) y=j;
     if(dcmp(a[0][y])<=0) break;
     x=-1;
     for(int i=1;i<=m;++i) if(dcmp(a[i][y])>0)
