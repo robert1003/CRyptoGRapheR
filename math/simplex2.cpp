@@ -43,4 +43,4 @@ VDB simplex(int m,int n,vector<VDB> a){
     if(left[i]<=n) ans[left[i]]=a[i][0];
   ans[0]=-a[0][0];
   return ans;
-}
+} // sometimes fails. check the condition and sum again
