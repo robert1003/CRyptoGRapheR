@@ -6,7 +6,7 @@ void dfs(int i){
   }
   if(V[i]==low[i]){
     int j;
-    do{j = stk[--top], instk[j] = 0, scc[j] = i;
-    }while(j != i);
+    do{j=stk[--top],instk[j]=0,scc[j]=i;
+    }while(j!=i);
   }
 }

@@ -6,6 +6,13 @@ Maximize c^T x subject to Ax ≤ b;
 with the corresponding asymmetric dual problem,
 Minimize b^T y subject to A^T y = c, y ≥ 0. 
 
+Maximize \sum x subject to x_i + x_j ≤ Aij, x ≥ 0;
+=> Maximize \sum x subject to x_i + x_j ≤ A_ij;
+=> Minimize A^T y = \sum A_ij y_ij subject to for all v, \sum_{i=v or j=v} y_ij = 1, y_ij ≥ 0
+=> possible optimal solution: y_ij = {0, 0.5, 1}
+=> y'=2y: \sum_{i=v or j=v} y'_ij = 2, y'_ij = {0, 1, 2}
+=> Minimum Bipartite perfect matching/2 (V1=X,V2=X,E=A)
+
 General Graph:
 |Max Ind. Set| + |Min Vertex Cover| = |V|
 |Max Ind. Edge Set| + |Min Edge Cover| = |V|

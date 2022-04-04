@@ -22,7 +22,7 @@ inline int DMST(){
   while(1){
     fill(mnInW, mnInW+V+1, INF);
     fill(prv, prv+V+1, -1);
-    REP(i, 1, E){
+    for(int i=1;i<=E;i++){
       int u=edges[i].u, v=edges[i].v, c=edges[i].c;
       if(u != v && v != root && c < mnInW[v])
         mnInW[v] = c, prv[v] = u;
@@ -31,7 +31,7 @@ inline int DMST(){
     fill(cyc, cyc+V+1, -1);
     r1 = 0;
     bool jf = 0;
-    REP(i, 1, V){
+    for(int i=1;i<=V;i++){
       if(con[i]) continue ;
       if(prv[i] == -1 && i != root) return -1;
       if(prv[i] > 0) r1 += mnInW[i];
@@ -49,7 +49,7 @@ inline int DMST(){
       }
     }
     if(!jf) break ;
-    REP(i, 1, E){
+    for(int i=1;i<=E;i++){
       int &u = edges[i].u;
       int &v = edges[i].v;
       if(cyc[v] > 0) edges[i].c -= mnInW[edges[i].v];

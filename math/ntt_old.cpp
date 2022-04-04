@@ -1,4 +1,4 @@
-typedef long long LL;
+typedef long long ll;
 // Remember coefficient are mod P
 /* p=a*2^n+1
    n		2^n 				p 				 a 		root
@@ -34,38 +34,38 @@ typedef long long LL;
 //   c[ i ] = a[ i ] * b[ i ];
 // ntt( n , c , 1 );
 //
-// then you have the result in c :: [LL]
-template<LL P, LL root, int MAXN>
+// then you have the result in c :: [ll]
+template<ll P, ll root, int MAXN>
 struct NTT{
-  static LL bigmod(LL a, LL b) {
-    LL res = 1;
-    for (LL bs = a; b; b >>= 1, bs = (bs * bs) % P) {
+  static ll bigmod(ll a, ll b) {
+    ll res = 1;
+    for (ll bs = a; b; b >>= 1, bs = (bs * bs) % P) {
       if(b&1) res=(res*bs)%P;
     }
     return res;
   }
-  static LL inv(LL a, LL b) {
+  static ll inv(ll a, ll b) {
     if(a==1)return 1;
-    return (((LL)(a-inv(b%a,a))*b+1)/a)%b;
+    return (((ll)(a-inv(b%a,a))*b+1)/a)%b;
   }
-  LL omega[MAXN+1];
+  ll omega[MAXN+1];
   NTT() {
     omega[0] = 1;
-    LL r = bigmod(root, (P-1)/MAXN);
+    ll r = bigmod(root, (P-1)/MAXN);
     for (int i=1; i<=MAXN; i++)
       omega[i] = (omega[i-1]*r)%P;
   }
   // n must be 2^k
-  void tran(int n, LL a[], bool inv_ntt=false){
+  void tran(int n, ll a[], bool inv_ntt=false){
     int basic = MAXN / n;
     int theta = basic;
     for (int m = n; m >= 2; m >>= 1) {
       int mh = m >> 1;
       for (int i = 0; i < mh; i++) {
-        LL w = omega[i*theta%MAXN];
+        ll w = omega[i*theta%MAXN];
         for (int j = i; j < n; j += m) {
           int k = j + mh;
-          LL x = a[j] - a[k];
+          ll x = a[j] - a[k];
           if (x < 0) x += P;
           a[j] += a[k];
           if (a[j] > P) a[j] -= P;
@@ -80,16 +80,16 @@ struct NTT{
       if (j < i) swap(a[i], a[j]);
     }
     if (inv_ntt) {
-      LL ni = inv(n,P);
+      ll ni = inv(n,P);
       reverse( a+1 , a+n );
       for (i = 0; i < n; i++)
         a[i] = (a[i] * ni) % P;
     }
   }
-  void operator()(int n, LL a[], bool inv_ntt=false) {
+  void operator()(int n, ll a[], bool inv_ntt=false) {
     tran(n, a, inv_ntt);
   }
 };
-const LL P=2013265921,root=31;
+const ll P=2013265921,root=31;
 const int MAXN=4194304;
 NTT<P, root, MAXN> ntt;

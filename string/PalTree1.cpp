@@ -33,8 +33,7 @@ struct PalT{
     return ++cnt[lst],lst;
   }
   void init(const char *_s){
-    tot=lst=n=0;
-    newNode(0,1),newNode(-1,1);
+    tot=lst=n=0; newNode(0,1),newNode(-1,1);
     for(;_s[n];) s[n+1]=_s[n],++n,state[n-1]=push();
     for(int i=tot-1;i>1;i--) cnt[fail[i]]+=cnt[i];
   }

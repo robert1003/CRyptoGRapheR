@@ -1,13 +1,15 @@
-double TwoConvexHullMinDis(Point P[], Point Q[], int n, int m) {
-  int YMinP=0, YMaxQ=0; double tmp, ans=1e9;
-  for(int i=0;i<n;++i) if(P[i].y<P[YMinP].y) YMinP=i;
-  for(int i=0;i<m;++i) if(Q[i].y>Q[YMaxQ].y) YMaxQ=i;
+double TwoConvexHullMinDis(Pt P[],Pt Q[],int n,int m){
+  int mn=0,mx=0; double tmp,ans=1e9;
+  for(int i=0;i<n;++i) if(P[i].y<P[mn].y) mn=i;
+  for(int i=0;i<m;++i) if(Q[i].y>Q[mx].y) mx=i;
   P[n]=P[0]; Q[m]=Q[0];
   for (int i=0;i<n;++i) {
-    while(tmp=((Q[YMaxQ+1]-P[YMinP+1])^(P[YMinP]-P[YMinP+1]))>((Q[YMaxQ]-P[YMinP+1])^(P[YMinP]-P[YMinP+1]))) YMaxQ=(YMaxQ+1)%m;
-    if(tmp<0)ans=min(ans,PtToSegDis(P[YMinP],P[YMinP+1],Q[YMaxQ]));
-    else ans=min(ans,TwoSegMinDis(P[YMinP],P[YMinP+1],Q[YMaxQ],Q[YMaxQ+1]));
-    YMinP=(YMinP+1)%n;
+    while(tmp=((Q[mx+1]-P[mn+1])^(P[mn]-P[mn+1]))>((Q[mx]-P[mn+1])^(P[mn]-P[mn+1]))) mx=(mx+1)%m;
+    if(tmp<0) // pt to segment distance
+      ans=min(ans,dis(Line(P[mn],P[mn+1]),Q[mx]));
+    else // segment to segment distance
+      ans=min(ans,dis(Line(P[mn],P[mn+1]),Line(Q[mx],Q[mx+1])));
+    mn=(mn+1)%n;
   }
   return ans;
 }

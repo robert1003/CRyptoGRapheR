@@ -37,11 +37,27 @@
   out-degree matrix $D_{ii}^{out} = outdeg(i)$ , $D_{ij}^{out} = 0$\\
   let $L^{in} = D^{in} - G$ , $L^{out} = D^{out} - G$ , delete the $i$-th row and column\\
   $det(L_i^{in})$ and $det(L_i^{out})$ is the number of spanning tree from/to root $i$\\
+\item Hall's theorem:\\
+  Let $G=(X+Y,E)$ be a bipartite graph. For $W\subseteq X$, let $N(W)\subseteq Y$ denotes the adjacent vertices set of $W$. Then, $G$ has a $X'$-perfect matching (matching contains $X'\subseteq X$) iff $\forall W\subseteq X', |W|\le|N(W)|$.
+\item Tutte Matrix:\\
+  For a graph $G=(V,E)$, its maximum matching $=\frac{rank(A)}{2}$ where\\
+  $A_{ij}=((i,j)\in E ? (i < j ? x_{ij} : -x_{ji}) : 0)$ and $x_{ij}$ are random numbers.
+\item Erdős–Gallai theorem:\\
+  There exists a simple graph with degree sequence $d_1\ge\cdots\ge d_n$ iff\\
+  $\sum\limits_{i=1}^{n} d_i$ is even and $\sum\limits_{i=1}^{k} d_i\le k(k-1)+\sum\limits_{i=k+1}^{n} min(d_i,k), \forall 1\le k\le n$
 \item Burnside Lemma:
   $|X/G|=\frac{1}{|G|}\sum\limits_{g \in G} {|X^g|}$
 \item Polya theorem:
   $|Y^x/G|=\frac{1}{|G|}\sum\limits_{g \in G} {m^{c(g)}}$\\
   $m = |Y|$ : num of colors, c(g) : num of cycle
+\item Prufer Sequence:\\
+  There is a bijection between the set of labeled trees with $n$ vertices and the set of sequences of length $n-2$ containing $1\sim n$.\\
+  Property: Each vertex $i$ exists $d_i-1$ times in the sequence.\\
+  Tree to sequence: iterate $n-2$ times to remove a leaf with smallest id and append its adjacent vertex's id to the end of the sequence.\\
+  Sequence to tree: iterate through $i=1\sim n-2$ and connect $a_i$ with the smallest id that doesn't exist in $a_{i+1},\dots,a_{n-2}$ and haven't been used yet. Also connect the remaining two unused vertices at last.
+\item Cayley's Formula:\\
+  Given a degree sequence $d_1,\dots,d_n$ of a labeled tree, there are $\frac{(n-2)!}{(d_1-1)!\cdots(d_n-1)!)}$ spanning trees.\\
+  Let $T_{n,k}=$ number of labeled forest of $n$ vertices and $k$ components such that vertices $1,\dots,k$ belong to different components, $T_{n,k}=kn^{n-k-1}$
 \item Anti SG (the person who has no strategy wins) :\\
   first player wins iff either\\
   1. SG value of ALL subgame $\le$ $1$ and SG value of the game $=$ $0$\\
@@ -75,4 +91,18 @@
   suppose $A \in \mathbb{R}^{n\times n}$ is invertible and $u,v \in \mathbb{R}^n$\\
   $A + uv^T$ is invertible if and only if $1 + v^TA^{-1}u \ne 0$\\
   $(A + uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$\\
+\item Pohlig-Hellman algorithm (discrete log):\\
+  Given an \textbf{order} $n$ group, generator $g$, element $h$, find $x$ s.t. $g^x=h$.\\
+  If $n=p^e$:\\
+    * let $x_0=0$, $\gamma=g^{p^{e-1}}$ where $\gamma$ has order $p$.\\
+    * for $k=0\sim e-1$:\\
+    1. let $h_k=(g^{-x_k}h)^{p^{e-1-k}}$ whose order divide $p\implies h_k\in \langle\gamma\rangle$.\\
+    2. find $d_k$ s.t. $\gamma^{d_k}=h_k$ with baby-step giant-step in $O(\sqrt p)$.\\
+    3. set $x_{k+1}=x_k+p^kd_k$\\
+    * return $x_e$ in total time complexity $O(e\sqrt p)$\\
+  If $n=\Pi_{i=1}^{r}p_i^{e_i}$:\\
+    * for each $i=1\sim r$:\\
+    1. let $g_i=g^{n/p_i^{e_i}}$ having order $p_i^{e_i}$, $h_i=h^{n/p_i^{e_i}}$ where $h_i\in\langle g_i\rangle$.\\
+    2. find $x_i$ s.t. $g_i^{x_i}=h_i$ using above algorithm.\\
+    * return $x=CRT(\{x_i\mod p_i^{e_i}\})$
 \end{itemize}

@@ -1,6 +1,7 @@
 /* p=a*2^k+1
    p                     a      k      root
    998244353             119    23     3
+   1107296257            33     25     10
    2013265921            15     27     31
    2061584302081         15     37     7
    2748779069441         5      39     3
@@ -41,15 +42,13 @@ struct NTT{
           a[i]=x+y; if(a[i]>=P) a[i]-=P;
           a[i+k2]=x-y; if(a[i+k2]<0) a[i+k2]+=P;
           w=mul(w, dw, P);
-        }
-      }
-    }
+    } } }
     if(inv_ntt){
       ll inv_n=inv(n,P);
       for(int i=0;i<n;i++) a[i]=mul(a[i], inv_n, P);
     }
   }
 };
-const ll P=2013265921,root=31;
 const int MAXN=4194304,MAXK=22; //MAXN=2^k
+const ll P=2013265921,root=31;
 NTT<P,root,MAXK,MAXN> ntt;

@@ -124,6 +124,9 @@ stringstyle=\itshape\color{Green4},
 \subsection{Custom Hash}
 \lstinputlisting{basic/custom_hash.cpp}
 
+\subsection{Fast Division/Modular}
+\lstinputlisting{basic/fastDiv.cpp}
+
 \subsection{python-related}
 \lstinputlisting{basic/python_trick.py}
 
@@ -182,7 +185,7 @@ stringstyle=\itshape\color{Green4},
 
 \section{Math}
 \subsection{FFT}
-\lstinputlisting{math/FFT_vector.cpp}
+\lstinputlisting{math/FFT.cpp}
 
 \subsection{NTT}
 \lstinputlisting{math/ntt1.cpp}
@@ -190,8 +193,14 @@ stringstyle=\itshape\color{Green4},
 \subsection{Fast Walsh Transform}
 \lstinputlisting{math/FWT.cpp}
 
+\subsection{FFT Mod}
+\lstinputlisting{math/fftmod.cpp}
+
 \subsection{Poly operator}
 \lstinputlisting{math/polyop.cpp}
+
+\subsection{Poly Interpolation}
+\lstinputlisting{math/PolyInterpolate.cpp}
 
 %\subsection{BigInt}
 %\lstinputlisting{math/Bigint.cpp}
@@ -232,11 +241,17 @@ stringstyle=\itshape\color{Green4},
 \subsection{Discrete sqrt}
 \lstinputlisting{math/DiscreteSqrt.cpp}
 
+\subsection{Discrete logarithm}
+\lstinputlisting{math/discreteLog.cpp}
+
 %\subsection{SchreierSims}
 %\lstinputlisting{math/SchreierSims.cpp}
 
 \subsection{Romberg}
 \lstinputlisting{math/Romberg.cpp}
+
+\subsection{Simpson}
+\lstinputlisting{math/simpson.cpp}
 
 %\subsection{Discrete K-th sqrt}
 %\lstinputlisting{math/DiscreteKthsqrt.cpp}
@@ -250,8 +265,26 @@ stringstyle=\itshape\color{Green4},
 %\subsection{Mod}
 %\lstinputlisting{math/MOD.cpp}
 
+%\subsection{Sum of Division/Modular}
+%\lstinputlisting{math/divsumAndModsum.cpp}
+
+\subsection{Sum of Division/Modular}
+\lstinputlisting{math/divsum.cpp}
+
+\subsection{Fraction Binary Search}
+\lstinputlisting{math/fracBinarySearch.cpp}
+
+\subsection{Closest Fraction}
+\lstinputlisting{math/continuedFraction.cpp}
+
 \subsection{Primes and $\mu$ function}
 \lstinputlisting{math/primes.cpp}
+
+\subsection{Prime Count}
+\lstinputlisting{math/PrimeCount.cpp}
+
+\subsection{Linear Basis}
+\lstinputlisting{math/LinearBasis.cpp}
 
 \subsection{Subset Convolution}
 \lstinputlisting{math/subsetConv.cpp}
@@ -294,6 +327,15 @@ stringstyle=\itshape\color{Green4},
 \subsection{Intersection of 2 circles}
 \lstinputlisting{geometry/Intersection_of_two_circles.cpp}
 
+\subsection{Point In Polygon}
+\lstinputlisting{geometry/PointInPolygon.cpp}
+
+\subsection{Distance of line and point}
+\lstinputlisting{geometry/PointToSegmentDistance.cpp}
+
+\subsection{Distance of two segments}
+\lstinputlisting{geometry/DistanceOfTwoSegments.cpp}
+
 \subsection{Circle cover}
 \lstinputlisting{geometry/CircleCover.cpp}
 
@@ -308,6 +350,12 @@ stringstyle=\itshape\color{Green4},
 
 %\subsection{Rotating Caliper}
 %\lstinputlisting{geometry/Rotating_Caliper.cpp}
+
+\subsection{Convex Hull Diameter}
+\lstinputlisting{geometry/HullDiameter.cpp}
+
+\subsection{Rotating Sweep Line}
+\lstinputlisting{geometry/rotatingSweepLine.cpp}
 
 \subsection{Tangent line of two circles}
 \lstinputlisting{geometry/Tangent_line_of_two_circles.cpp}
@@ -325,7 +373,7 @@ stringstyle=\itshape\color{Green4},
 \lstinputlisting{geometry/polyUnion.cpp}
 
 \subsection{Lower Concave Hull}
-\lstinputlisting{geometry/lowerConcaveHull2.cpp}
+\lstinputlisting{geometry/lowerConcaveHull3.cpp}
 
 \subsection{Delaunay Triangulation}
 \lstinputlisting{geometry/DelaunayTriangulation.cpp}
@@ -347,6 +395,9 @@ stringstyle=\itshape\color{Green4},
 
 %\subsection{Min/Max Enclosing Rectangle}
 %\lstinputlisting{geometry/minMaxEnclosingRectangle.cpp}
+
+\subsection{Min and Max Enclosing Rectangle}
+\lstinputlisting{geometry/minMaxEnclosingRectangle2.cpp}
 
 \subsection{Min dist on Cuboid}
 \lstinputlisting{geometry/minDistonCuboid.cpp}
@@ -393,6 +444,9 @@ stringstyle=\itshape\color{Green4},
 \subsection{Maximum General Weighted Matching}
 \lstinputlisting{graph/BorrowedGeneralWeightedMatching.cpp}
 
+\subsection{Edge Coloring}
+\lstinputlisting{graph/EdgeColoring.cpp}
+
 \subsection{Minimum Steiner Tree}
 \lstinputlisting{graph/MinimumSteinerTree.cpp}
 
@@ -408,11 +462,17 @@ stringstyle=\itshape\color{Green4},
 \subsection{K-th Shortest Path}
 \lstinputlisting{graph/KSP.cpp}
 
-%\subsection{Graph Hash}
-%\input{graph/graphHash.tex}
-
 \subsection{Chordal Graph}
 \lstinputlisting{graph/chordal.cpp}
+
+\subsection{Matroid Intersection}
+\lstinputlisting{graph/matroidIntersection.cpp}
+
+\subsection{Tree Hash}
+\lstinputlisting{graph/TreeHash.cpp}
+
+\subsection{Graph Hash}
+\input{graph/graphHash.tex}
 
 \subsection{Graph Method}
 \lstinputlisting{graph/GraphMethod.txt}
@@ -488,6 +548,9 @@ stringstyle=\itshape\color{Green4},
 
 \subsection{Hilbert Curve}
 \lstinputlisting{others/HilbertCurve.cpp}
+
+\subsection{DeBrujin Sequence}
+\lstinputlisting{others/DeBrujin.cpp}
 
 %\subsection{\# of Intersection of segments}
 %\lstinputlisting{others/painter.cpp}

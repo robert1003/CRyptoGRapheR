@@ -2,19 +2,15 @@ const int INF=0x3f3f3f3f;
 template<typename T>
 struct stoer_wagner{// 0-base
   static const int MAXN=501;
-  T g[MAXN][MAXN],dis[MAXN];
-  int nd[MAXN],n,s,t;
+  T g[MAXN][MAXN],dis[MAXN]; int nd[MAXN],n,s,t;
   void init(int _n){
     n=_n;
-    for(int i=0;i<n;++i)
-      for(int j=0;j<n;++j)g[i][j]=0;
+    for(int i=0;i<n;++i) for(int j=0;j<n;++j )g[i][j]=0;
   }
-  void add_edge(int u,int v,T w){
-    g[u][v]=g[v][u]+=w;
-  }
+  void add_edge(int u,int v,T w){ g[u][v]=g[v][u]+=w; }
   T min_cut(){
     T ans=INF;
-    for(int i=0;i<n;++i)nd[i]=i;
+    for(int i=0;i<n;++i) nd[i]=i;
     for(int ind,tn=n;tn>1;--tn){
       for(int i=1;i<tn;++i)dis[nd[i]]=0;
       for(int i=1;i<tn;++i){

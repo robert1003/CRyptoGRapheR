@@ -43,8 +43,8 @@ inline int chinese_remainder() {
   int i,m,s=0;
   for(i=0;i<pfn;i++) {
     m=mod/pf[i];
-    pm[i]=(LL)m*inverse(m,pf[i])%mod;
-    s=(s+(LL)pm[i]*rem[i])%mod;
+    pm[i]=(ll)m*inverse(m,pf[i])%mod;
+    s=(s+(ll)pm[i]*rem[i])%mod;
   }
   return s;
 }
