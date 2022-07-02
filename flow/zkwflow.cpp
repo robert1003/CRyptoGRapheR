@@ -7,7 +7,7 @@ struct zkwflow{
     n=_n,s=_s,t=_t;
     for(int i=0;i<n;i++) E[i].clear();
   }
-  void add_edge(int u,int v,int f,ll w){
+  void addEdge(int u,int v,int f,ll w){
     E[u].push_back({v,f,(int)E[v].size(),w});
     E[v].push_back({u,0,(int)E[u].size()-1,-w});
   }
@@ -46,5 +46,5 @@ struct zkwflow{
       flow+=f; cost+=dis[t]*f;
     }
     return{ flow,cost };
-  }
+  } // reset: do nothing
 } flow;
