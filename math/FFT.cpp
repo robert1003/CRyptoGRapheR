@@ -1,4 +1,4 @@
-const int MXN=1048576;// (must be 2^k)
+const int MXN=1048576; // (must be 2^k)
 // before any usage,run pre_fft() first
 typedef long double ld;
 typedef complex<ld> cplx;
@@ -8,7 +8,7 @@ void pre_fft(){
   for(int i=0;i<=MXN;i++)
     omega[i]=exp(i*2*PI/MXN*I);
 }
-// n must be 2^k; fft(cplx(a+b,a-b)); Re(ifft(c))/4+0.5;
+// n must be 2^k
 void fft(int n,cplx a[],bool inv=false){
   int basic=MXN/n,theta=basic;
   for(int m=n;m>=2;m>>=1) {
@@ -28,4 +28,4 @@ void fft(int n,cplx a[],bool inv=false){
     if(j<i) swap(a[i],a[j]);
   }
   if(inv) for(i=0;i<n;i++) a[i]/=n;
-}
+} // c=fft(cplx(a+b,a-b)); Re(ifft(c*c))/4+0.5;

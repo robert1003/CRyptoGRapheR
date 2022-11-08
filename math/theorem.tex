@@ -105,4 +105,7 @@
     1. let $g_i=g^{n/p_i^{e_i}}$ having order $p_i^{e_i}$, $h_i=h^{n/p_i^{e_i}}$ where $h_i\in\langle g_i\rangle$.\\
     2. find $x_i$ s.t. $g_i^{x_i}=h_i$ using above algorithm.\\
     * return $x=CRT(\{x_i\mod p_i^{e_i}\})$
+\item Hook Length Formula:\\
+  A DAG of a grid graph where $G=\{v(i,j) | 1\le i\le n,1\le j\le \lambda_i\}$ and $\lambda_1\ge\dots\ge\lambda_n$ and $E[v(i,j)]=\{v(i+1,j),v(i,j+1),\text{if exists}\}$.\\
+  Then, the number of topological sort is $\frac{N!}{\prod h_\lambda(i,j)}$ where $N=\sum \lambda_i$ and $h_\lambda(i,j)=|\{v(i',j') | (i'\ge i\land j'=j)\lor(i'=i\land j'\ge j)\}|$ (number of nodes on its top or right).
 \end{itemize}
